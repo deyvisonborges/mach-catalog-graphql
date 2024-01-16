@@ -1,10 +1,10 @@
 import { BaseModel } from '../model.base';
 
 describe('Common Base / Base Model', () => {
-  it('should create a base model instance', () => {
+  it('must create an instance of the base model', () => {
     const baseModelInstance = new BaseModel({});
     expect(baseModelInstance).toEqual({
-      id: '',
+      id: baseModelInstance.id,
       active: baseModelInstance.active,
       createdAt: baseModelInstance.createdAt,
       updatedAt: baseModelInstance.updatedAt,

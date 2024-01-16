@@ -1,3 +1,5 @@
+import { UUID } from '../valueobjects/uuid.vo';
+
 export type BaseModelProps = {
   id?: string;
   active?: boolean;
@@ -12,7 +14,7 @@ export class BaseModel implements BaseModelProps {
   updatedAt?: Date;
 
   constructor(props: BaseModelProps) {
-    this.id = props?.id || ``;
+    this.id = props?.id || new UUID().get();
     this.active = props?.active ?? true;
     this.createdAt = props?.createdAt || new Date();
     this.updatedAt = props?.updatedAt || new Date();
