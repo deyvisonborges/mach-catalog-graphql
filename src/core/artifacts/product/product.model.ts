@@ -1,38 +1,40 @@
-import { BaseModelProps } from 'src/core/common/base/model.base';
-
-export type ProductConstantTypes =
-  | 'SIMPLE_PRODUCT'
-  | 'CONFIGURABLE_PRODUCT'
-  | 'GROUPED_PRODUCT'
-  | 'VIRTUAL_PRODUCT'
-  | 'BUNDLE_PRODUCT'
-  | 'DOWNLOADABLE_PRODUCT'
-  | 'GITF_CARD';
+import { BaseModelProps } from 'src/core/common/base/model.base'
 
 export type ProductModelProps = {
-  name: string;
-  description: string;
-  sku: string;
-  salePrice: number;
-  costPrice: number;
-  promotionalPrince: number;
-  thumbnail: string;
-  type: ProductConstantTypes;
-} & BaseModelProps;
+  name: string
+  description: string
+  sku: string
+  salePrice: number
+  costPrice: number
+  promotionalPrice: number
+  thumbnail: string
+} & BaseModelProps
 
-export abstract class ProductModel implements ProductModelProps {
-  name: string;
-  description: string;
-  sku: string;
-  salePrice: number;
-  costPrice: number;
-  promotionalPrince: number;
-  thumbnail: string;
-  type: ProductConstantTypes;
+/**
+ * @description
+ * Nesse modelo, eu posso receber o tipo do produto especialista porém, eu não obrigo a passar
+ * como informação para essa classe, por isso uso o modo abaixo, para pode garantir que vou
+ * estender as configurácoes iniciais do produto e fazer um merge com as props do produto
+ * que for passado como generic.
+ * ```ts
+ * export abstract class ProductModel<T extends ProductModelProps = ProductModelProps> {}
+ * ```
+ */
+export abstract class ProductModel<T extends ProductModelProps>
+  implements ProductModelProps
+{
+  name: string
+  description: string
+  sku: string
+  salePrice: number
+  costPrice: number
+  promotionalPrice: number
+  thumbnail: string
 
-  constructor(props: ProductModelProps) {
-    Object.assign(props);
+  constructor(props: T) {
+    Object.assign(this, props)
   }
 
-  abstract create(): this;
+  // Simple contract to implemento Factory Method
+  abstract create(): T
 }

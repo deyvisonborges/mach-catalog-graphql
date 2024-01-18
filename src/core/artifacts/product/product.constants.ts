@@ -1,0 +1,8 @@
+export type ProductTypeConstant =
+  | 'SIMPLE_PRODUCT'
+  | 'CONFIGURABLE_PRODUCT'
+  | 'GROUPED_PRODUCT'
+  | 'VIRTUAL_PRODUCT'
+  | 'BUNDLE_PRODUCT'
+  | 'DOWNLOADABLE_PRODUCT'
+  | 'GITF_CARD'
