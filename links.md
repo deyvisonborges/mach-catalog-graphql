@@ -1,0 +1,1 @@
+https://www.mageplaza.com/kb/6-types-product-types-magento-2.html#product-types

@@ -3,7 +3,6 @@ import { AppController } from './app.controller'
 import { AppService } from './app.service'
 import { GraphQLModule } from '@nestjs/graphql'
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo'
-import { CategoryResolver } from './core/artifacts/category/category.resolver'
 
 @Module({
   imports: [
@@ -13,6 +12,6 @@ import { CategoryResolver } from './core/artifacts/category/category.resolver'
     })
   ],
   controllers: [AppController],
-  providers: [AppService, CategoryResolver]
+  providers: [AppService]
 })
 export class AppModule {}
