@@ -1,6 +1,12 @@
 import { ProductCreator } from './product.creator'
-import { VirtualProductProps } from './variants/virtual-product.concrete'
-import { SimpleProductProps } from './variants/simple-product.concrete'
+import {
+  SimpleProduct,
+  SimpleProductProps
+} from './variants/simple-product/simple-product.model'
+import {
+  VirtualProduct,
+  VirtualProductProps
+} from './variants/virtual-product/virtual-product.model'
 
 describe('Test Factory Creator', () => {
   let creator: ProductCreator
@@ -10,23 +16,18 @@ describe('Test Factory Creator', () => {
   })
 
   it('should create a virtual product', () => {
-    const virtualProduct = creator.createProduct('VIRTUAL_PRODUCT', {
+    const virtualProductMock = new VirtualProduct({
       downloadLink: 'http://link'
     } as VirtualProductProps)
-
-    console.log('virtual', virtualProduct)
+    const virtualProduct = creator.createProduct(virtualProductMock)
 
     // Add assertions as needed
     expect(virtualProduct).toBeDefined()
   })
 
   it('should create a simple product', () => {
-    const simpleProduct = creator.createProduct('SIMPLE_PRODUCT', {
-      material: 'linho',
-      weight: 300
-    } as SimpleProductProps)
-
-    console.log('simple product', simpleProduct)
+    const simpleProductMock = new SimpleProduct({} as SimpleProductProps)
+    const simpleProduct = creator.createProduct(simpleProductMock)
 
     // Add assertions as needed
     expect(simpleProduct).toBeDefined()

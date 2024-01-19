@@ -1,4 +1,5 @@
-import { ProductContract, ProductContractProps } from '../product.contract'
+import { ProductTypeConstant } from '../../product.constants'
+import { ProductContract, ProductContractProps } from '../../product.contract'
 
 export type VirtualProductProps = {
   downloadLink: string
@@ -16,6 +17,7 @@ export class VirtualProduct
   costPrice: number
   promotionalPrice: number
   thumbnail: string
+  type: ProductTypeConstant = 'VIRTUAL_PRODUCT'
 
   constructor(props: VirtualProductProps) {
     super(props)

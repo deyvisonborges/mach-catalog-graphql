@@ -1,4 +1,5 @@
-import { ProductContract, ProductContractProps } from '../product.contract'
+import { ProductTypeConstant } from '../../product.constants'
+import { ProductContract, ProductContractProps } from '../../product.contract'
 
 export type SimpleProductProps = {
   size: string
@@ -6,7 +7,10 @@ export type SimpleProductProps = {
   material: string
 } & ProductContractProps
 
-export class SimpleProduct extends ProductContract<SimpleProductProps> {
+export class SimpleProduct
+  extends ProductContract<SimpleProductProps>
+  implements SimpleProductProps
+{
   name: string
   description: string
   sku: string
@@ -17,6 +21,7 @@ export class SimpleProduct extends ProductContract<SimpleProductProps> {
   size: string
   weight: number
   material: string
+  type: ProductTypeConstant = 'SIMPLE_PRODUCT'
 
   constructor(props: SimpleProductProps) {
     super(props)

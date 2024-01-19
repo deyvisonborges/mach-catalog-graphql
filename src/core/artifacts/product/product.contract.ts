@@ -1,4 +1,5 @@
 import { BaseModel, BaseModelProps } from '../../../core/common/base/model.base'
+import { ProductTypeConstant } from './product.constants'
 
 export type ProductContractProps = {
   name: string
@@ -8,6 +9,7 @@ export type ProductContractProps = {
   costPrice: number
   promotionalPrice: number
   thumbnail: string
+  type: ProductTypeConstant
 } & BaseModelProps
 
 export abstract class ProductContract<
