@@ -1,6 +1,5 @@
 import { Module } from '@nestjs/common'
-import { AppController } from './app.controller'
-import { AppService } from './app.service'
+import { AppResolver } from './app.resolver'
 import { GraphQLModule } from '@nestjs/graphql'
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo'
 import path from 'path'
@@ -9,10 +8,9 @@ import path from 'path'
   imports: [
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
-      autoSchemaFile: path.resolve(process.cwd(), '/src/schemq.gql')
+      autoSchemaFile: path.resolve(process.cwd(), 'src/schemq.gql')
     })
   ],
-  controllers: [AppController],
-  providers: [AppService]
+  providers: [AppResolver]
 })
 export class AppModule {}
