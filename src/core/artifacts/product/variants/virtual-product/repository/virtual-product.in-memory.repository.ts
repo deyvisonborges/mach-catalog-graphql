@@ -1,4 +1,4 @@
-import { InMemoryBaseRepository } from 'src/core/common/base/in-memory-repository.base'
+import { InMemoryBaseRepository } from '../../../../../../core/common/base/in-memory-repository.base'
 import { VirtualProductProps } from '../virtual-product.model'
 import { VirtualProductRepositoryContract } from './virtual-product.repository.contract'
 
