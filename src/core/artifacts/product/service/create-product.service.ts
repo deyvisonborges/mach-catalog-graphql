@@ -12,7 +12,6 @@ export class CreateProductService
   async execute(input: CreateProductInput): Promise<ProductCreatorVariants> {
     // const v = new VirtualProduct({} as VirtualProduct)
     // const s = new SimpleProduct({} as SimpleProduct)
-
     // await this.productCreator.createProduct(s)
     return await this.productCreator.createProduct(input)
   }

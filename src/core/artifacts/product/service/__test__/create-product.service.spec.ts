@@ -35,6 +35,7 @@ describe('Artifact / Product', () => {
       size: '20xl',
       type: 'SIMPLE_PRODUCT'
     })
+
     await service.execute(vp)
     await service.execute(sp)
   })
