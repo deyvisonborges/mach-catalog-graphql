@@ -18,11 +18,12 @@ export class SimpleProduct extends ProductContract<SimpleProductProps> {
   weight: number
   material: string
 
-  constructor() {
-    super()
+  constructor(props: SimpleProductProps) {
+    super(props)
+    Object.assign(this, props)
   }
 
   create(props: SimpleProductProps): SimpleProductProps {
-    return { ...props }
+    return new SimpleProduct(props)
   }
 }

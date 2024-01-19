@@ -1,4 +1,4 @@
-import { BaseModelProps } from '@/core/common/base/model.base'
+import { BaseModel, BaseModelProps } from '../../../core/common/base/model.base'
 
 export type ProductContractProps = {
   name: string
@@ -10,6 +10,8 @@ export type ProductContractProps = {
   thumbnail: string
 } & BaseModelProps
 
-export abstract class ProductContract<T extends ProductContractProps> {
+export abstract class ProductContract<
+  T extends ProductContractProps
+> extends BaseModel {
   abstract create(props: T): T
 }
