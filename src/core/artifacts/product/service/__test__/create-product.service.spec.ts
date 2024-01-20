@@ -1,18 +1,17 @@
-import { InMemoryBaseRepository } from '../../../../../core/common/base/in-memory-repository.base'
 import { ProductCreator } from '../../product.creator'
 import { SimpleProduct } from '../../variants/simple-product/simple-product.model'
 import { VirtualProduct } from '../../variants/virtual-product/virtual-product.model'
 import { CreateProductService } from '../create-product.service'
-import { ProductCreatorVariants } from '../../product.creator.contract'
+import { ProductInMemoryRepository } from '../../product.in-memory.repository'
 
 describe('Artifact / Product', () => {
   let service: CreateProductService
   let productCreator: ProductCreator
-  let inMemoryRepository: InMemoryBaseRepository<ProductCreatorVariants>
+  let inMemoryRepository: ProductInMemoryRepository
 
   beforeEach(() => {
     productCreator = new ProductCreator()
-    inMemoryRepository = new InMemoryBaseRepository<ProductCreatorVariants>()
+    inMemoryRepository = new ProductInMemoryRepository()
     service = new CreateProductService(productCreator, inMemoryRepository)
   })
 

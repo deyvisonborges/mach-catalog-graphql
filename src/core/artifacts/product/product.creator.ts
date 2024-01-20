@@ -9,7 +9,7 @@ import {
   VirtualProduct,
   VirtualProductProps
 } from './variants/virtual-product/virtual-product.model'
-import { ProductCreatorVariants } from './product.creator.contract'
+import { ProductVariantType } from './product.creator.contract'
 
 export class ProductCreator {
   public createProduct<T extends ProductTypeConstant>(
@@ -18,7 +18,7 @@ export class ProductCreator {
       : T extends 'VIRTUAL_PRODUCT'
       ? Omit<VirtualProductProps, keyof BaseModelProps>
       : never
-  ): ProductCreatorVariants {
+  ): ProductVariantType {
     switch (config.type) {
       case 'SIMPLE_PRODUCT':
         return new SimpleProduct(config as SimpleProductProps)

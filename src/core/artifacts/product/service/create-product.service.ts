@@ -1,23 +1,20 @@
 import { BaseServiceContract } from 'src/core/common/base/service.base'
-import { ProductCreatorVariants } from '../product.creator.contract'
+import { ProductVariantType } from '../product.creator.contract'
 import { ProductCreator } from '../product.creator'
-import { BaseRepositoryContract } from 'src/core/common/base/repository.contract.base'
+import { ProductRepositoryContract } from '../product.repository.contract'
 
-export type CreateProductInput = ProductCreatorVariants
+export type CreateProductInput = ProductVariantType
 
 export class CreateProductService
-  implements BaseServiceContract<CreateProductInput, ProductCreatorVariants>
+  implements BaseServiceContract<CreateProductInput, ProductVariantType>
 {
   constructor(
     private readonly productCreator: ProductCreator,
-    private readonly repository: BaseRepositoryContract<ProductCreatorVariants>
+    private readonly repository: ProductRepositoryContract
   ) {}
 
-  async execute(input: CreateProductInput): Promise<ProductCreatorVariants> {
-    // const v = new VirtualProduct({} as VirtualProduct)
-    // const s = new SimpleProduct({} as SimpleProduct)
-    // await this.productCreator.createProduct(s)
-    const createdProduct = await this.productCreator.createProduct(input)
+  async execute(input: CreateProductInput): Promise<ProductVariantType> {
+    const createdProduct = this.productCreator.createProduct(input)
     await this.repository.createOne(createdProduct)
     return createdProduct
   }

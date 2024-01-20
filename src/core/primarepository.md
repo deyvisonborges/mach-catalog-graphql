@@ -25,12 +25,12 @@ import { SimpleProduct } from '../../variants/simple-product/simple-product.mode
 import { VirtualProduct } from '../../variants/virtual-product/virtual-product.model';
 import { CreateProductService } from '../create-product.service';
 import { PrismaBaseRepository } from 'caminho/para/PrismaBaseRepository';
-import { ProductCreatorVariants } from 'caminho/para/product.creator.contract';
+import { ProductVariantType } from 'caminho/para/product.creator.contract';
 
 describe('Artifact / Product', () => {
   let service: CreateProductService;
   let productCreator: ProductCreator;
-  let prismaRepository: PrismaBaseRepository<ProductCreatorVariants>;
+  let prismaRepository: PrismaBaseRepository<ProductVariantType>;
 
   beforeEach(() => {
     productCreator = new ProductCreator();
