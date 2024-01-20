@@ -1,6 +1,6 @@
-import { ProductTypeConstant } from '../product.constants'
-import { ProductCreator } from '../product.creator'
-import { ProductInMemoryRepository } from '../repositories/product.in-memory.repository'
+import { ProductTypeConstant } from '../../product.constants'
+import { ProductCreator } from '../../product.creator'
+import { ProductInMemoryRepository } from '../product.in-memory.repository'
 
 describe('Artifact Product / InMemoryRepository', () => {
   let productRepository: ProductInMemoryRepository
