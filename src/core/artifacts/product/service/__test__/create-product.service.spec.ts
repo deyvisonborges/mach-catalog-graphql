@@ -1,7 +1,7 @@
 import { ProductCreator } from '../../product.creator'
 import { ProductInMemoryRepository } from '../../repositories/product.in-memory.repository'
-import { SimpleProduct } from '../../variants/simple-product/simple-product.model'
-import { VirtualProduct } from '../../variants/virtual-product/virtual-product.model'
+import { SimpleProduct } from '../../variants/simple-product.model'
+import { VirtualProduct } from '../../variants/virtual-product.model'
 import { CreateProductService } from '../create-product.service'
 
 describe('Artifact / Product', () => {

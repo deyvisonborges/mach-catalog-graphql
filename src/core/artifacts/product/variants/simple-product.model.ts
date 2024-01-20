@@ -1,5 +1,5 @@
-import { ProductTypeConstant } from '../../product.constants'
-import { ProductContract, ProductContractProps } from '../../product.contract'
+import { ProductTypeConstant } from '../product.constants'
+import { ProductContract, ProductContractProps } from '../product.contract'
 
 export type SimpleProductProps = {
   size: string

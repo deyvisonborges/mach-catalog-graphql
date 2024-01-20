@@ -4,11 +4,11 @@ import { ProductTypeConstant } from './product.constants'
 import {
   SimpleProduct,
   SimpleProductProps
-} from './variants/simple-product/simple-product.model'
+} from './variants/simple-product.model'
 import {
   VirtualProduct,
   VirtualProductProps
-} from './variants/virtual-product/virtual-product.model'
+} from './variants/virtual-product.model'
 import { ProductVariantType } from './product.creator.contract'
 
 export class ProductCreator {

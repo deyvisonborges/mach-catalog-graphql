@@ -1,8 +1,8 @@
 import { ProductInMemoryRepository } from '../../repositories/product.in-memory.repository'
 import { SimpleProductInMemoryRepository } from '../../variants/simple-product/repository/simple-product.in-memory.repository'
-import { SimpleProduct } from '../../variants/simple-product/simple-product.model'
+import { SimpleProduct } from '../../variants/simple-product.model'
 import { VirtualProductInMemoryRepository } from '../../variants/virtual-product/repository/virtual-product.in-memory.repository'
-import { VirtualProduct } from '../../variants/virtual-product/virtual-product.model'
+import { VirtualProduct } from '../../variants/virtual-product.model'
 import { FindAllProductsService } from '../find-all-products.service'
 
 describe('Product Service', () => {
