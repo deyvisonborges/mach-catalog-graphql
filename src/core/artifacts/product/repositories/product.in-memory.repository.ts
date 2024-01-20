@@ -1,7 +1,7 @@
-import { InMemoryBaseRepository } from '../../../core/common/base/in-memory-repository.base'
+import { InMemoryBaseRepository } from '../../../common/base/in-memory-repository.base'
 import { ProductRepositoryContract } from './product.repository.contract'
-import { ProductVariantType } from './product.creator.contract'
-import { ProductTypeConstant } from './product.constants'
+import { ProductVariantType } from '../product.creator.contract'
+import { ProductTypeConstant } from '../product.constants'
 
 export class ProductInMemoryRepository
   extends InMemoryBaseRepository<ProductVariantType>

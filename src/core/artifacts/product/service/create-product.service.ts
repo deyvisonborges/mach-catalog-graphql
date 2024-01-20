@@ -1,7 +1,7 @@
 import { BaseServiceContract } from 'src/core/common/base/service.base'
 import { ProductVariantType } from '../product.creator.contract'
 import { ProductCreator } from '../product.creator'
-import { ProductRepositoryContract } from '../product.repository.contract'
+import { ProductRepositoryContract } from '../repositories/product.repository.contract'
 
 export type CreateProductInput = ProductVariantType
 

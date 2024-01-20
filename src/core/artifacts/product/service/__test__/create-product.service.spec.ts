@@ -1,8 +1,8 @@
 import { ProductCreator } from '../../product.creator'
+import { ProductInMemoryRepository } from '../../repositories/product.in-memory.repository'
 import { SimpleProduct } from '../../variants/simple-product/simple-product.model'
 import { VirtualProduct } from '../../variants/virtual-product/virtual-product.model'
 import { CreateProductService } from '../create-product.service'
-import { ProductInMemoryRepository } from '../../product.in-memory.repository'
 
 describe('Artifact / Product', () => {
   let service: CreateProductService
