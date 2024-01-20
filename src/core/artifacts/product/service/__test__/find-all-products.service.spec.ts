@@ -1,19 +1,13 @@
 import { ProductInMemoryRepository } from '../../repositories/product.in-memory.repository'
-import { SimpleProductInMemoryRepository } from '../../variants/simple-product/repository/simple-product.in-memory.repository'
 import { SimpleProduct } from '../../variants/simple-product.model'
-import { VirtualProductInMemoryRepository } from '../../variants/virtual-product/repository/virtual-product.in-memory.repository'
 import { VirtualProduct } from '../../variants/virtual-product.model'
 import { FindAllProductsService } from '../find-all-products.service'
 
 describe('Product Service', () => {
-  let simpleProductRepository: SimpleProductInMemoryRepository
-  let virtualProductRepository: VirtualProductInMemoryRepository
   let productRepository: ProductInMemoryRepository
   let productService: FindAllProductsService
 
   beforeEach(() => {
-    simpleProductRepository = new SimpleProductInMemoryRepository()
-    virtualProductRepository = new VirtualProductInMemoryRepository()
     productRepository = new ProductInMemoryRepository()
     productService = new FindAllProductsService(productRepository)
   })
@@ -26,10 +20,7 @@ describe('Product Service', () => {
       {} as VirtualProduct
     )
 
-    const s = await simpleProductRepository.createOne(simpleProduct)
-    const v = await virtualProductRepository.createOne(virtualProduct)
-
-    productRepository.createMany([s, v])
+    productRepository.createMany([simpleProduct, virtualProduct])
 
     const allProducts = await productService.execute()
 
