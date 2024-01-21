@@ -11,6 +11,11 @@ import {
 } from './variants/virtual-product.model'
 import { ProductVariantType } from './product.creator.contract'
 
+type ProductType = {
+  simpleProduct: SimpleProductProps
+  virtualProduct: VirtualProductProps
+}
+
 export class ProductCreator {
   public createProduct<T extends ProductTypeConstant>(
     config: T extends 'SIMPLE_PRODUCT'
@@ -28,4 +33,11 @@ export class ProductCreator {
         throw new Error('Invalid product type')
     }
   }
+
+  // static create<K extends keyof ProductType>(
+  //   type: K,
+  //   props: Omit<ProductType[K], 'type'>
+  // ) {
+  //   return ProductCreator.create(type, { ...props, type: type })
+  // }
 }
