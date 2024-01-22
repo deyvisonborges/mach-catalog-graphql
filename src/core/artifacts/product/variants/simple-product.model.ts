@@ -21,11 +21,11 @@ export class SimpleProduct
   size: string
   weight: number
   material: string
-  type: ProductTypeConstant = 'SIMPLE_PRODUCT'
+  readonly type: ProductTypeConstant = 'SIMPLE_PRODUCT'
 
   constructor(props: SimpleProductProps) {
     super(props)
-    Object.assign(this, props)
+    Object.assign(this, { ...props, type: 'SIMPLE_PRODUCT' })
   }
 
   create(props: SimpleProductProps): SimpleProductProps {

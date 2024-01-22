@@ -34,7 +34,7 @@ export class ProductCreator {
     }
   }
 
-  // static create<K extends keyof ProductType>(
+  // public static create<K extends keyof ProductType>(
   //   type: K,
   //   props: Omit<ProductType[K], 'type'>
   // ) {
