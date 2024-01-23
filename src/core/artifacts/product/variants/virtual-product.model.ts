@@ -1,3 +1,4 @@
+import { ProductImageProps } from '../../product-image/product-image.model'
 import { ProductTypeConstant } from '../product.constants'
 import { ProductContract, ProductContractProps } from '../product.contract'
 
@@ -17,6 +18,7 @@ export class VirtualProduct
   costPrice: number
   promotionalPrice: number
   thumbnail: string
+  images: ProductImageProps[]
   type: ProductTypeConstant = 'VIRTUAL_PRODUCT'
 
   constructor(props: VirtualProductProps) {

@@ -1,3 +1,4 @@
+import { ProductImageProps } from '../../product-image/product-image.model'
 import { ProductTypeConstant } from '../product.constants'
 import { ProductContract, ProductContractProps } from '../product.contract'
 
@@ -21,6 +22,7 @@ export class SimpleProduct
   size: string
   weight: number
   material: string
+  images: ProductImageProps[]
   readonly type: ProductTypeConstant = 'SIMPLE_PRODUCT'
 
   constructor(props: SimpleProductProps) {

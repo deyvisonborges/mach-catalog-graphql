@@ -29,7 +29,10 @@ describe('Artifact / Product', () => {
     const vp = new VirtualProduct({
       ...base,
       downloadLink: '/link',
-      type: 'VIRTUAL_PRODUCT'
+      type: 'VIRTUAL_PRODUCT',
+      images: [
+        { name: 'Image 001', description: 'Image description', url: '/' }
+      ]
     })
 
     const sp = new SimpleProduct({
@@ -37,7 +40,10 @@ describe('Artifact / Product', () => {
       material: 'linho',
       weight: 20,
       size: '20xl',
-      type: 'SIMPLE_PRODUCT'
+      type: 'SIMPLE_PRODUCT',
+      images: [
+        { name: 'Image 001', description: 'Image description', url: '/' }
+      ]
     })
 
     await service.execute(vp)

@@ -34,7 +34,8 @@ describe('UpdateProductByIdService', () => {
       material: 'linho',
       size: '12',
       type: 'VIRTUAL_PRODUCT',
-      weight: 12
+      weight: 12,
+      images: []
     })
     await productRepository.createOne(vp)
 

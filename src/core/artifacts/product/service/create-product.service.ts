@@ -14,8 +14,11 @@ export class CreateProductService
   ) {}
 
   async execute(input: CreateProductInput): Promise<ProductVariantType> {
+    if (!input.images || input.images.length === 0)
+      throw new Error('Bad request', { cause: 'Inform at least 1 product' })
+
     const createdProduct = this.productCreator.createProduct(input)
-    await this.repository.createOne(createdProduct)
-    return createdProduct
+
+    return await this.repository.createOne(createdProduct)
   }
 }

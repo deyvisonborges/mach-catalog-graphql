@@ -25,7 +25,8 @@ describe('Artifact Product / InMemoryRepository', () => {
       material: 'linho',
       size: '12',
       type,
-      weight: 12
+      weight: 12,
+      images: []
     }
 
     const createdProduct = productCreator.createProduct(product)

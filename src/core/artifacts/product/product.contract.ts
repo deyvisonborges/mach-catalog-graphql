@@ -1,4 +1,5 @@
 import { BaseModel, BaseModelProps } from '../../../core/common/base/model.base'
+import { ProductImageProps } from '../product-image/product-image.model'
 import { ProductTypeConstant } from './product.constants'
 
 export type ProductContractProps = {
@@ -10,6 +11,12 @@ export type ProductContractProps = {
   promotionalPrice: number
   thumbnail: string
   type: ProductTypeConstant
+  /**
+   * Relação "One-to-Many" com ProductImage.
+   * Cada produto pode ter várias imagens associadas.
+   * @backReference ProductImageProps.product
+   */
+  images: ProductImageProps[]
 } & BaseModelProps
 
 export abstract class ProductContract<
