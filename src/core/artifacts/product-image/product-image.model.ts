@@ -1,4 +1,4 @@
-import { BaseModel, BaseModelProps } from 'src/core/common/base/model.base'
+import { BaseModel, BaseModelProps } from '../../../core/common/base/model.base'
 
 export type ProductImageProps = {
   name: string

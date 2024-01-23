@@ -1,4 +1,4 @@
-import { BaseServiceContract } from 'src/core/common/base/service.base'
+import { BaseServiceContract } from '../../../../core/common/base/service.base'
 import { ProductImageProps } from '../product-image.model'
 import { ProductImageRepositoryContract } from '../repositories/product-image.repository.contract'
 

@@ -1,6 +1,6 @@
-import { BaseModelProps } from 'src/core/common/base/model.base'
+import { BaseModelProps } from '../../../../core/common/base/model.base'
 import { ProductImageProps } from '../product-image.model'
-import { BaseServiceContract } from 'src/core/common/base/service.base'
+import { BaseServiceContract } from '../../../../core/common/base/service.base'
 import { ProductImageRepositoryContract } from '../repositories/product-image.repository.contract'
 
 export type CreateProductImageInput = Omit<
