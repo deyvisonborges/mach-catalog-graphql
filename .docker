@@ -17,3 +17,6 @@ docker-compose*.yam
 *.md
 *.png
 *.jpg
+.history
+Dockerfile
+Dockerfile.prod
