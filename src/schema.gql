@@ -2,6 +2,136 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type ProductImage {
+  name: String!
+  description: String!
+  url: String!
+  productId: String!
+}
+
+type SimpleProduct {
+  size: String!
+  weight: Float!
+  material: String!
+  name: String!
+  description: String!
+  sku: String!
+  salePrice: Float!
+  costPrice: Float!
+  promotionalPrice: Float!
+  thumbnail: String!
+  type: String!
+  images: [ProductImageOT!]!
+}
+
+type ProductImageOT {
+  name: String!
+  description: String!
+  url: String!
+  productId: String!
+}
+
 type Query {
   hello: String!
+  simpleProduct(id: Int!): SimpleProduct!
+}
+
+type Mutation {
+  createProduct(input: CreateProductInput!): ProductUnion!
+  createSimpleProduct(createSimpleProductInput: CreateSimpleProductInput!): SimpleProduct!
+  updateSimpleProduct(updateSimpleProductInput: UpdateSimpleProductInput!): SimpleProduct!
+  removeSimpleProduct(id: Int!): SimpleProduct!
+}
+
+union ProductUnion = SimpleProductObject | VirtualProductObject
+
+type SimpleProductObject implements Product {
+  name: String!
+  description: String!
+  sku: String!
+  salePrice: Float!
+  costPrice: Float!
+  promotionalPrice: Float!
+  thumbnail: String!
+  type: String!
+  images: [ProductImage!]!
+  size: String!
+  weight: Float!
+  material: String!
+}
+
+interface Product {
+  name: String!
+  description: String!
+  sku: String!
+  salePrice: Float!
+  costPrice: Float!
+  promotionalPrice: Float!
+  thumbnail: String!
+  type: String!
+  images: [ProductImage!]!
+}
+
+type VirtualProductObject implements Product {
+  name: String!
+  description: String!
+  sku: String!
+  salePrice: Float!
+  costPrice: Float!
+  promotionalPrice: Float!
+  thumbnail: String!
+  type: String!
+  images: [ProductImage!]!
+  downloadLink: String!
+}
+
+input CreateProductInput {
+  simpleProduct: SimpleProductInputType
+  virtualProduct: VirtualProductInputType
+}
+
+input SimpleProductInputType {
+  name: String!
+  description: String!
+  sku: String!
+  salePrice: Float!
+  costPrice: Float!
+  promotionalPrice: Float!
+  thumbnail: String!
+  type: String!
+  images: [ProductImageInput!]!
+  size: String!
+  weight: Float!
+  material: String!
+}
+
+input ProductImageInput {
+  name: String!
+  description: String!
+  url: String!
+  productId: String!
+}
+
+input VirtualProductInputType {
+  name: String!
+  description: String!
+  sku: String!
+  salePrice: Float!
+  costPrice: Float!
+  promotionalPrice: Float!
+  thumbnail: String!
+  type: String!
+  images: [ProductImageInput!]!
+  downloadLink: String!
+}
+
+input CreateSimpleProductInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateSimpleProductInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
 }

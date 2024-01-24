@@ -3,6 +3,7 @@ import { AppResolver } from './app.resolver'
 import { GraphQLModule } from '@nestjs/graphql'
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo'
 import { ConfigModule } from './app/config/config.module'
+import { ApiModule } from './app/api/api.module';
 import path from 'path'
 
 @Module({
@@ -11,7 +12,8 @@ import path from 'path'
       driver: ApolloDriver,
       autoSchemaFile: path.resolve(process.cwd(), 'src/schema.gql')
     }),
-    ConfigModule.forRoot()
+    ConfigModule.forRoot(),
+    ApiModule
   ],
   providers: [AppResolver]
 })
