@@ -10,7 +10,7 @@ on:
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
-  FOLDER_NAME: ${{ github.repository }}__app
+  FOLDER_NAME: ${{ github.event.repository.name }}_app
 
 jobs:
   build:
