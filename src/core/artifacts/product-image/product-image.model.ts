@@ -6,6 +6,7 @@ export type ProductImageProps = {
   url: string
 
   /**
+   *  * Relação "Many-To-One" com ProductContract.
    * ID opcional do produto ao qual a imagem está associada.
    * Isso cria uma relação "Optional One-to-Many" ou "One-to-Zero-or-Many".
    * @backReference ProductContractProps.images
