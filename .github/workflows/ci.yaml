@@ -68,10 +68,10 @@ jobs:
         run: docker compose -f docker-compose.ci.yml up -d
 
       - name: Generate environments
-        run: docker compose -f docker-compose.ci.yml exec -u root -T app cp .env.example .env.example
+        run: docker compose -f docker-compose.ci.yml exec -u root -T app cp .env.example .env
       
       - name: Run unit tests
-        run: docker compose -f docker-compose.cy.yml -T app npm run test
+        run: docker compose -f docker-compose.ci.yml exec -T app npm run test
 
       # Sign the resulting Docker image digest except on PRs.
       # This will only write to the public Rekor transparency log when the Docker
