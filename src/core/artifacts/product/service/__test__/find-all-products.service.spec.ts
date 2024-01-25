@@ -1,5 +1,5 @@
 import { ProductInMemoryRepository } from '../../repositories/product.in-memory.repository'
-import { SimpleProduct } from '../../variants/simple-product.model'
+import { SimpleProduct } from '../../variants/virtual-product/simple-product.model'
 import { VirtualProduct } from '../../variants/virtual-product.model'
 import { FindAllProductsService } from '../find-all-products.service'
 

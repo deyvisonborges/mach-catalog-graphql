@@ -1,6 +1,6 @@
-import { ProductImageProps } from '../../product-image/product-image.model'
-import { ProductTypeConstant } from '../product.constants'
-import { ProductContract, ProductContractProps } from '../product.contract'
+import { ProductImageProps } from '../../../product-image/product-image.model'
+import { ProductTypeConstant } from '../../product.constants'
+import { ProductContract, ProductContractProps } from '../../product.contract'
 
 export type SimpleProductProps = {
   size: string

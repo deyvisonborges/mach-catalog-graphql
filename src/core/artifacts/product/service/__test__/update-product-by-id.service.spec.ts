@@ -1,6 +1,6 @@
 import { ProductInMemoryRepository } from '../../repositories/product.in-memory.repository'
 import { ProductRepositoryContract } from '../../repositories/product.repository.contract'
-import { SimpleProduct } from '../../variants/simple-product.model'
+import { SimpleProduct } from '../../variants/virtual-product/simple-product.model'
 import { FindProductByIdService } from '../find-product-by-id.service'
 import { UpdateProductByIdService } from '../update-product-by-id.service'
 

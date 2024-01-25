@@ -1,44 +1,21 @@
-import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql'
-import { SimpleProductService } from './simple-product.service'
-import { SimpleProduct } from './entities/simple-product.entity'
-import { CreateSimpleProductInput } from './dto/create-simple-product.input'
-import { UpdateSimpleProductInput } from './dto/update-simple-product.input'
+import { Resolver, Mutation, Args } from '@nestjs/graphql'
+import { SimpleProductObject } from './simple-product.object'
+import { SimpleProductInput } from './simple-product.input'
+import { CreateSimpleProductService } from 'src/core/artifacts/product/variants/virtual-product/service/create-simple-product.service'
+import { Inject } from '@nestjs/common'
 
-@Resolver(() => SimpleProduct)
+@Resolver(() => SimpleProductObject)
 export class SimpleProductResolver {
-  constructor(private readonly simpleProductService: SimpleProductService) {}
+  @Inject()
+  private readonly createSimpleProductService: CreateSimpleProductService
 
-  @Mutation(() => SimpleProduct)
-  createSimpleProduct(
+  @Mutation(() => SimpleProductObject)
+  async createSimpleProduct(
     @Args('createSimpleProductInput')
-    createSimpleProductInput: CreateSimpleProductInput
+    createSimpleProductInput: SimpleProductInput
   ) {
-    return this.simpleProductService.create(createSimpleProductInput)
-  }
-
-  @Query(() => [SimpleProduct], { name: 'simpleProduct' })
-  findAll() {
-    return this.simpleProductService.findAll()
-  }
-
-  @Query(() => SimpleProduct, { name: 'simpleProduct' })
-  findOne(@Args('id', { type: () => Int }) id: number) {
-    return this.simpleProductService.findOne(id)
-  }
-
-  @Mutation(() => SimpleProduct)
-  updateSimpleProduct(
-    @Args('updateSimpleProductInput')
-    updateSimpleProductInput: UpdateSimpleProductInput
-  ) {
-    return this.simpleProductService.update(
-      updateSimpleProductInput.id,
-      updateSimpleProductInput
+    return await this.createSimpleProductService.execute(
+      createSimpleProductInput
     )
-  }
-
-  @Mutation(() => SimpleProduct)
-  removeSimpleProduct(@Args('id', { type: () => Int }) id: number) {
-    return this.simpleProductService.remove(id)
   }
 }

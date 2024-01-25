@@ -2,7 +2,7 @@ import { ProductCreator } from './product.creator'
 import {
   SimpleProduct,
   SimpleProductProps
-} from './variants/simple-product.model'
+} from './variants/virtual-product/simple-product.model'
 import {
   VirtualProduct,
   VirtualProductProps

@@ -4,7 +4,7 @@ import { ProductTypeConstant } from './product.constants'
 import {
   SimpleProduct,
   SimpleProductProps
-} from './variants/simple-product.model'
+} from './variants/virtual-product/simple-product.model'
 import {
   VirtualProduct,
   VirtualProductProps
@@ -33,7 +33,6 @@ export class ProductCreator {
         throw new Error('Invalid product type')
     }
   }
-
   // public static create<K extends keyof ProductType>(
   //   type: K,
   //   props: Omit<ProductType[K], 'type'>

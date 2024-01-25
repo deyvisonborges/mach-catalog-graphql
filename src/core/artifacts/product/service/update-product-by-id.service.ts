@@ -1,7 +1,7 @@
 import { BaseServiceContract } from 'src/core/common/base/service.base'
 import { ProductVariantType } from '../product.creator.contract'
 import { BaseModelProps } from 'src/core/common/base/model.base'
-import { SimpleProductProps } from '../variants/simple-product.model'
+import { SimpleProductProps } from '../variants/virtual-product/simple-product.model'
 import { ProductRepositoryContract } from '../repositories/product.repository.contract'
 import { FindProductByIdService } from './find-product-by-id.service'
 
