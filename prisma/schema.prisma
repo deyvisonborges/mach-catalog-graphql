@@ -1,0 +1,62 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model ProductImage {
+  id          String  @id @default(uuid())
+  name        String
+  description String
+  url         String
+  productId   String
+  product     Product @relation(fields: [productId], references: [id])
+
+  @@map("products_images")
+}
+
+model Product {
+  id               String          @id @default(uuid())
+  name             String
+  description      String
+  sku              String
+  salePrice        Float           @map("sale_price")
+  costPrice        Float           @map("cost_price")
+  promotionalPrice Float           @map("promotional_price")
+  thumbnail        String
+  simpleProduct    SimpleProduct?
+  virtualProduct   VirtualProduct?
+  ProductImage     ProductImage[]
+
+  @@map("products")
+}
+
+model SimpleProduct {
+  id       String  @id @default(uuid())
+  size     String
+  weight   Int
+  material String
+  product  Product @relation(fields: [id], references: [id])
+
+  @@map("products_simple")
+}
+
+model VirtualProduct {
+  id           String  @id @default(uuid())
+  downloadLink String  @map("download_link")
+  product      Product @relation(fields: [id], references: [id])
+
+  @@map("products_virtual")
+}
+
+generator repo {
+  provider = "prisma-repo"
+  output   = "../src/repository"
+  query    = true
+  warn     = true
+  info     = true
+  error    = true
+}
