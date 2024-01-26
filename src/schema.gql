@@ -36,8 +36,24 @@ interface BaseProductInput {
   images: [ProductImageObject!]!
 }
 
+type ProductObject implements BaseProductInput {
+  name: String!
+  description: String!
+  sku: String!
+  salePrice: Float!
+  costPrice: Float!
+  promotionalPrice: Float!
+  thumbnail: String!
+  type: String!
+  images: [ProductImageObject!]!
+  size: String!
+  weight: Float!
+  material: String!
+}
+
 type Query {
   hello: String!
+  findAll: [ProductObject!]!
 }
 
 type Mutation {

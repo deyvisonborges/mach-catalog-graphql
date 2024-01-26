@@ -11,11 +11,6 @@ import {
 } from './variants/virtual-product.model'
 import { ProductVariantType } from './product.creator.contract'
 
-type ProductType = {
-  simpleProduct: SimpleProductProps
-  virtualProduct: VirtualProductProps
-}
-
 export class ProductCreator {
   public createProduct<T extends ProductTypeConstant>(
     config: T extends 'SIMPLE_PRODUCT'

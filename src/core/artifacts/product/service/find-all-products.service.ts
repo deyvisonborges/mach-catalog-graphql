@@ -8,6 +8,6 @@ export class FindAllProductsService
   constructor(private readonly productRepository: ProductRepositoryContract) {}
 
   async execute(): Promise<ProductVariantType[]> {
-    return this.productRepository.findAll()
+    return await this.productRepository.findAll()
   }
 }

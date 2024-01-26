@@ -1,0 +1,24 @@
+fragment productFields on ProductObject {
+  name
+  description
+  sku
+  salePrice
+  costPrice
+  promotionalPrice
+  thumbnail
+  type
+  size
+  weight
+  material
+  images {
+    name
+    description
+    url
+  }
+}
+
+query {
+  findAll {
+    ...productFields
+  }
+}
