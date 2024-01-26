@@ -37,7 +37,6 @@
     "uuid": "^9.0.1"
   },
   "devDependencies": {
-    "@krsbx/prisma-repo": "^0.2.7",
     "@nestjs/cli": "^9.0.0",
     "@nestjs/schematics": "^9.0.0",
     "@nestjs/testing": "^9.0.0",
