@@ -5,4 +5,5 @@ export type ConfigEnvSchema = {
   POSTGRES_USER: string
   POSTGRES_PASSWORD: string
   POSTGRES_NAME: string
+  DATABASE_URL: string
 }
