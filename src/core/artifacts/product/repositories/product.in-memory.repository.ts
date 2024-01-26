@@ -12,4 +12,10 @@ export class ProductInMemoryRepository
   ): Promise<ProductVariantType> {
     return await this.items.find(product => product.type === type)
   }
+
+  async findProductBySku(sku: string): Promise<ProductVariantType> {
+    return await this.items.find(product =>
+      product.sku.toLowerCase() === sku.toLowerCase() ? product : null
+    )
+  }
 }

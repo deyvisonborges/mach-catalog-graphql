@@ -54,8 +54,14 @@ input SimpleProductInput {
   thumbnail: String!
   type: String!
   images: [ProductImageInput!]!
+
+  """Define a product size"""
   size: String!
+
+  """Define a product weight"""
   weight: Float!
+
+  """Define product material"""
   material: String!
 }
 

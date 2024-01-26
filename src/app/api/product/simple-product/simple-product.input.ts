@@ -1,14 +1,14 @@
-import { Field, InputType } from '@nestjs/graphql'
+import { Field, Float, InputType, Int } from '@nestjs/graphql'
 import { ProductInput } from '../product.input.base'
 
 @InputType()
 export class SimpleProductInput extends ProductInput {
-  @Field()
+  @Field(() => String, { description: 'Define a product size' })
   size: string
 
-  @Field()
+  @Field(() => Float, { description: 'Define a product weight' })
   weight: number
 
-  @Field()
+  @Field(() => String, { description: 'Define product material' })
   material: string
 }
