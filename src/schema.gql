@@ -45,7 +45,23 @@ type Mutation {
 }
 
 input SimpleProductInput {
+  name: String!
+  description: String!
+  sku: String!
+  salePrice: Float!
+  costPrice: Float!
+  promotionalPrice: Float!
+  thumbnail: String!
+  type: String!
+  images: [ProductImageInput!]!
   size: String!
   weight: Float!
   material: String!
+}
+
+input ProductImageInput {
+  name: String!
+  description: String!
+  url: String!
+  productId: String
 }

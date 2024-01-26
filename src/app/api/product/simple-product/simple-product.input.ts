@@ -1,8 +1,8 @@
 import { Field, InputType } from '@nestjs/graphql'
-import { BaseProductInput } from '../product.input.base'
+import { ProductInput } from '../product.input.base'
 
 @InputType()
-export class SimpleProductInput extends BaseProductInput {
+export class SimpleProductInput extends ProductInput {
   @Field()
   size: string
 
