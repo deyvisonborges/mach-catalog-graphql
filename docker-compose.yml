@@ -1,6 +1,8 @@
+version: '3.8'
+
 services:
   postgres:
-    image: postgres@latest
+    image: postgres:latest
     restart: always
     env_file:
       - .env
@@ -13,6 +15,8 @@ services:
     volumes:
       - postgres:/var/lib/postgresql/data
     ports:
-      - '5433:5433'
+      - '5433:5432'
+
 volumes:
   postgres:
+    driver: local
