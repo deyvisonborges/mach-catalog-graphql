@@ -1,24 +1,36 @@
-fragment productFields on ProductObject {
-  name
-  description
-  sku
-  salePrice
-  costPrice
-  promotionalPrice
-  thumbnail
-  type
-  size
-  weight
-  material
-  images {
-    name
-    description
-    url
-  }
-}
-
 query {
   findAll {
-    ...productFields
+    ... on SimpleProductObject {
+      size
+      weight
+      material
+      product {
+        name
+        description
+        sku
+        salePrice
+        costPrice
+        promotionalPrice
+        thumbnail
+        productType {
+          name
+        }
+      }
+    }
+    ... on VirtualProductObject {
+      downloand_link
+      product {
+        name
+        description
+        sku
+        salePrice
+        costPrice
+        promotionalPrice
+        thumbnail
+        productType {
+          name
+        }
+      }
+    }
   }
 }

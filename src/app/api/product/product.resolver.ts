@@ -1,15 +1,15 @@
 import { Resolver, Query } from '@nestjs/graphql'
+import { ProductsUnion } from './product.union'
 import { Inject } from '@nestjs/common'
 import { FindAllProductsService } from 'src/core/artifacts/product/service/find-all-products.service'
-import { ProductObject } from './product.object'
 
-@Resolver(() => ProductObject)
+@Resolver(() => ProductsUnion)
 export class ProductResolver {
   @Inject()
-  private readonly findAllProductsService: FindAllProductsService
+  private readonly findAllProducts: FindAllProductsService
 
-  @Query(() => [ProductObject])
+  @Query(() => [ProductsUnion])
   async findAll() {
-    return await this.findAllProductsService.execute()
+    return await this.findAllProducts.execute()
   }
 }

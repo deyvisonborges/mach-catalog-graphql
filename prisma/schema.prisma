@@ -12,51 +12,58 @@ model ProductImage {
   name        String
   description String
   url         String
-  productId   String
-  product     Product @relation(fields: [productId], references: [id])
+  productId   String  @map("product_id")
+  Product     Product @relation(fields: [productId], references: [id])
 
   @@map("products_images")
 }
 
+enum ProductTypeEnum {
+  SIMPLE_PRODUCT
+  VIRTUAL_PRODUCT
+}
+
+model ProductType {
+  id      String          @id @default(uuid())
+  name    ProductTypeEnum
+  Product Product[]
+}
+
 model Product {
-  id               String          @id @default(uuid())
+  id               String           @id @default(uuid())
   name             String
   description      String
   sku              String
-  salePrice        Float           @map("sale_price")
-  costPrice        Float           @map("cost_price")
-  promotionalPrice Float           @map("promotional_price")
+  salePrice        Float            @map("sale_price")
+  costPrice        Float            @map("cost_price")
+  promotionalPrice Float            @map("promotional_price")
   thumbnail        String
-  simpleProduct    SimpleProduct?
-  virtualProduct   VirtualProduct?
-  ProductImage     ProductImage[]
+  productTypeId    String           @map("product_type_id")
+  productType      ProductType      @relation(fields: [productTypeId], references: [id])
+  images           ProductImage[]
+  simpleProduct    SimpleProduct[]
+  virtualProduct   VirtualProduct[]
 
   @@map("products")
 }
 
 model SimpleProduct {
-  id       String  @id @default(uuid())
-  size     String
-  weight   Int
-  material String
-  product  Product @relation(fields: [id], references: [id])
+  id        String  @id @default(uuid())
+  size      String
+  weight    Int
+  material  String
+  productId String  @map("product_id")
+  product   Product @relation(fields: [productId], references: [id])
 
   @@map("products_simple")
 }
 
 model VirtualProduct {
-  id           String  @id @default(uuid())
-  downloadLink String  @map("download_link")
-  product      Product @relation(fields: [id], references: [id])
+  id           String @id @default(uuid())
+  downloadLink String @map("download_link")
+
+  productId String  @map("product_id")
+  product   Product @relation(fields: [productId], references: [id])
 
   @@map("products_virtual")
-}
-
-generator repo {
-  provider = "prisma-repo"
-  output   = "../src/repository"
-  query    = true
-  warn     = true
-  info     = true
-  error    = true
 }

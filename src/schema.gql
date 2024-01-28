@@ -2,14 +2,11 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type ProductImageObject {
+type ProductTypeObject {
   name: String!
-  description: String!
-  url: String!
-  productId: String
 }
 
-type SimpleProductObject implements BaseProductInput {
+type ProductObject {
   name: String!
   description: String!
   sku: String!
@@ -17,73 +14,24 @@ type SimpleProductObject implements BaseProductInput {
   costPrice: Float!
   promotionalPrice: Float!
   thumbnail: String!
-  type: String!
-  images: [ProductImageObject!]!
-  size: String!
-  weight: Float!
-  material: String!
-}
-
-interface BaseProductInput {
-  name: String!
-  description: String!
-  sku: String!
-  salePrice: Float!
-  costPrice: Float!
-  promotionalPrice: Float!
-  thumbnail: String!
-  type: String!
-  images: [ProductImageObject!]!
-}
-
-type ProductObject implements BaseProductInput {
-  name: String!
-  description: String!
-  sku: String!
-  salePrice: Float!
-  costPrice: Float!
-  promotionalPrice: Float!
-  thumbnail: String!
-  type: String!
-  images: [ProductImageObject!]!
-  size: String!
-  weight: Float!
-  material: String!
+  productType: ProductTypeObject!
 }
 
 type Query {
   hello: String!
-  findAll: [ProductObject!]!
+  findAll: [ProductsUnion!]!
 }
 
-type Mutation {
-  createSimpleProduct(createSimpleProductInput: SimpleProductInput!): SimpleProductObject!
-}
+union ProductsUnion = SimpleProductObject | VirtualProductObject
 
-input SimpleProductInput {
-  name: String!
-  description: String!
-  sku: String!
-  salePrice: Float!
-  costPrice: Float!
-  promotionalPrice: Float!
-  thumbnail: String!
-  type: String!
-  images: [ProductImageInput!]!
-
-  """Define a product size"""
+type SimpleProductObject {
   size: String!
-
-  """Define a product weight"""
   weight: Float!
-
-  """Define product material"""
   material: String!
+  product: ProductObject!
 }
 
-input ProductImageInput {
-  name: String!
-  description: String!
-  url: String!
-  productId: String
+type VirtualProductObject {
+  downloand_link: String!
+  product: ProductObject!
 }
