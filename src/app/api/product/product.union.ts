@@ -3,11 +3,11 @@ import { SimpleProductObject } from './objects/simple-product.object'
 import { VirtualProductObject } from './objects/virtual-product.object'
 
 export const ProductsUnion = createUnionType({
-  name: 'ProductsUnion',
-  types: () => [SimpleProductObject, VirtualProductObject],
+  name: 'Products',
+  types: () => [SimpleProductObject, VirtualProductObject] as const,
   resolveType: value => {
-    if (value instanceof SimpleProductObject) return SimpleProductObject
-    if (value instanceof VirtualProductObject) return VirtualProductObject
+    if (value.product.productType.name)
+      return SimpleProductObject || VirtualProductObject
     return null
   }
 })

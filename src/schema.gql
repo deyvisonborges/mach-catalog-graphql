@@ -17,13 +17,6 @@ type ProductObject {
   productType: ProductTypeObject!
 }
 
-type Query {
-  hello: String!
-  findAll: [ProductsUnion!]!
-}
-
-union ProductsUnion = SimpleProductObject | VirtualProductObject
-
 type SimpleProductObject {
   size: String!
   weight: Float!
@@ -34,4 +27,49 @@ type SimpleProductObject {
 type VirtualProductObject {
   downloand_link: String!
   product: ProductObject!
+}
+
+type Query {
+  hello: String!
+  findAll: [Products!]!
+  findAllSimpleProduct: [SimpleProductObject!]!
+}
+
+union Products = SimpleProductObject | VirtualProductObject
+
+type Mutation {
+  createSimpleProduct(input: SimpleProductInput!): SimpleProductObject!
+  createVirtualProduct(input: VirtualProductInput!): VirtualProductObject!
+}
+
+input SimpleProductInput {
+  """Define a product size"""
+  size: String!
+
+  """Define a product weight"""
+  weight: Float!
+
+  """Define product material"""
+  material: String!
+  product: ProductInput!
+}
+
+input ProductInput {
+  name: String!
+  description: String!
+  sku: String!
+  salePrice: Float!
+  costPrice: Float!
+  promotionalPrice: Float!
+  thumbnail: String!
+  productType: ProductTypeInput!
+}
+
+input ProductTypeInput {
+  name: String!
+}
+
+input VirtualProductInput {
+  downloand_link: String!
+  product: ProductInput!
 }

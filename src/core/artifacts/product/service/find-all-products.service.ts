@@ -1,12 +1,20 @@
 import { BaseServiceContract } from 'src/core/common/base/service.base'
-import { ProductTypesUnion } from '../product.constants'
 import { ProductRepositoryContract } from '../repository/product.repository.contract'
 import { SimpleProductRepositoryContract } from '../../simple-product/repository/simple-product.repository.contract'
 import { VirtualProductRepositoryContract } from '../../virtual-product/repository/virtual-product.repository.contract'
 import { ProductTypeRepositoryContract } from '../../product-type/repository/product-type.repository.contract'
+import { ProductModelProps } from '../product.model'
+import { BaseModelProps } from 'src/core/common/base/model.base'
+import { SimpleProductModelProps } from '../../simple-product/simple-product.model'
+import { VirtualProductModelProps } from '../../virtual-product/virtual-product.model'
+
+export type FindAllProductsServiceOutput =
+  | (Omit<ProductModelProps, keyof BaseModelProps> &
+      Omit<SimpleProductModelProps, keyof BaseModelProps>)
+  | Omit<VirtualProductModelProps, keyof BaseModelProps>
 
 export class FindAllProductsService
-  implements BaseServiceContract<void, ProductTypesUnion[]>
+  implements BaseServiceContract<void, FindAllProductsServiceOutput[]>
 {
   constructor(
     private readonly productRepository: ProductRepositoryContract,
@@ -15,7 +23,7 @@ export class FindAllProductsService
     private readonly virtualProductRepository: VirtualProductRepositoryContract
   ) {}
 
-  async execute(): Promise<any[]> {
+  async execute(): Promise<FindAllProductsServiceOutput[]> {
     const [products, productType, productSimple, productVirtual] =
       await Promise.all([
         this.productRepository.findAll(),
@@ -25,13 +33,11 @@ export class FindAllProductsService
       ])
 
     const productsAndTypes = products.map(product => {
-      const type = productType.find(p => p.id === product.id)
       const simpleProduct = productSimple.find(p => p.id === product.id)
       const virtualProduct = productVirtual.find(p => p.id === product.id)
 
       return {
         ...product,
-        type: type ? type.name : '',
         ...(simpleProduct && {
           weight: simpleProduct.weight,
           material: simpleProduct.material,
@@ -39,11 +45,11 @@ export class FindAllProductsService
         }),
         ...(virtualProduct && {
           downloadLink: virtualProduct.downloadLink
-        })
+        }),
+        ...(product.product.productType && {})
       }
     })
 
-    console.log(productsAndTypes)
     return productsAndTypes
   }
 }

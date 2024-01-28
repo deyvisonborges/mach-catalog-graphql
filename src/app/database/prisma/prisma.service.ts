@@ -24,7 +24,6 @@ export class PrismaService
         }
       }
     })
-    console.log(configService.get<string>('DATABASE_URL'))
   }
 
   /**
