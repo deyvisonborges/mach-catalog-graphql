@@ -27,6 +27,8 @@ model ProductType {
   id      String          @id @default(uuid())
   name    ProductTypeEnum
   Product Product[]
+
+  @@map("products_types")
 }
 
 model Product {
