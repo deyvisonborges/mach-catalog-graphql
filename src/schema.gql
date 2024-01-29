@@ -40,6 +40,7 @@ union Products = SimpleProductObject | VirtualProductObject
 type Mutation {
   createSimpleProduct(input: SimpleProductInput!): SimpleProductObject!
   createVirtualProduct(input: VirtualProductInput!): VirtualProductObject!
+  createProductType(input: ProductTypeInput!): ProductTypeObject!
 }
 
 input SimpleProductInput {
