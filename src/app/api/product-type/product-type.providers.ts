@@ -1,19 +1,22 @@
-import { ProductTypeInMemoryRepository } from 'src/core/artifacts/product-type/repository/product-type.in-memory.repository'
 import { CreateProductTypeService } from 'src/core/artifacts/product-type/service/create-product-type.service'
+import { ProductTypePrismaRepository } from './product-type.prisma.repository'
+import { PrismaService } from 'src/app/database/prisma/prisma.service'
 
 const repositories = [
   {
-    provide: ProductTypeInMemoryRepository,
-    useFactory: () => new ProductTypeInMemoryRepository()
+    provide: ProductTypePrismaRepository,
+    useFactory: (prismaService: PrismaService) =>
+      new ProductTypePrismaRepository(prismaService),
+    inject: [PrismaService]
   }
 ]
 
 const services = [
   {
     provide: CreateProductTypeService,
-    useFactory: (repository: ProductTypeInMemoryRepository) =>
+    useFactory: (repository: ProductTypePrismaRepository) =>
       new CreateProductTypeService(repository),
-    inject: [ProductTypeInMemoryRepository]
+    inject: [ProductTypePrismaRepository]
   }
 ]
 

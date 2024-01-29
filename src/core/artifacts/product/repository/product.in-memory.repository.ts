@@ -1,14 +1,14 @@
 import { InMemoryBaseRepository } from '../../../common/base/in-memory-repository.base'
 import { ProductRepositoryContract } from './product.repository.contract'
-import { ProductTypesUnion } from '../product.constants'
+import { ProductModelProps } from '../product.model'
 
 export class ProductInMemoryRepository
-  extends InMemoryBaseRepository<ProductTypesUnion>
+  extends InMemoryBaseRepository<ProductModelProps>
   implements ProductRepositoryContract
 {
-  async findProductBySku(sku: string): Promise<ProductTypesUnion> {
+  async findProductBySku(sku: string): Promise<ProductModelProps> {
     return await this.items.find(product =>
-      product.product.sku.toLowerCase() === sku.toLowerCase() ? product : null
+      product.sku.toLowerCase() === sku.toLowerCase() ? product : null
     )
   }
 }

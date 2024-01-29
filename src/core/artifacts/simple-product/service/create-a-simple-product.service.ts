@@ -39,11 +39,8 @@ export class CreateASimpleProductService
       )
 
     const product = await this.productsRepository.createOne({
-      ...input,
-      product: {
-        ...input.product,
-        productType
-      }
+      ...input.product,
+      productType: productType
     })
 
     return await this.repository.createOne({ ...input, ...product })

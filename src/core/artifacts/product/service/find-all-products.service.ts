@@ -44,8 +44,8 @@ export class FindAllProductsService
         })
       }
 
-      if (product.product.productType)
-        productAndType.productType = product.product.productType
+      if (product.productType.id)
+        productAndType.productType = product.productType.id
 
       return productAndType
     })

@@ -2,11 +2,15 @@ import { ProductInMemoryRepository } from 'src/core/artifacts/product/repository
 import { FindAllProductsService } from 'src/core/artifacts/product/service/find-all-products.service'
 import { SimpleProductInMemoryRepository } from 'src/core/artifacts/simple-product/repository/simple-product.in-memory.repository'
 import { VirtualProductInMemoryRepository } from 'src/core/artifacts/virtual-product/repository/virtual-product.in-memory.repository'
+import { ProductPrismaRepository } from './product.prisma.repository'
+import { PrismaService } from 'src/app/database/prisma/prisma.service'
 
 const repositories = [
   {
-    provide: ProductInMemoryRepository,
-    useFactory: () => new ProductInMemoryRepository()
+    provide: ProductPrismaRepository,
+    useFactory: (prismaService: PrismaService) =>
+      new ProductPrismaRepository(prismaService),
+    inject: [PrismaService]
   },
   {
     provide: SimpleProductInMemoryRepository,
@@ -22,7 +26,7 @@ const services = [
   {
     provide: FindAllProductsService,
     useFactory: (
-      productRepository: ProductInMemoryRepository,
+      productRepository: ProductPrismaRepository,
       simpleProductRepository: SimpleProductInMemoryRepository,
       virtualProductRepository: VirtualProductInMemoryRepository
     ) => {
@@ -33,7 +37,7 @@ const services = [
       )
     },
     inject: [
-      ProductInMemoryRepository,
+      ProductPrismaRepository,
       SimpleProductInMemoryRepository,
       VirtualProductInMemoryRepository
     ]

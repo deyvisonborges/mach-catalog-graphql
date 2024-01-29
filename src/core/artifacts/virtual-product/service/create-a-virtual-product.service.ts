@@ -26,7 +26,9 @@ export class CreateAVirtualProductService
         HttpStatus.BAD_REQUEST
       )
 
-    const product = await this.productsRepository.createOne(input)
+    const product = await this.productsRepository.createOne({
+      ...input.product
+    })
 
     return await this.repository.createOne({ ...input, ...product })
   }

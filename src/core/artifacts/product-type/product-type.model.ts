@@ -1,12 +1,15 @@
 import { BaseModel, BaseModelProps } from 'src/core/common/base/model.base'
+import { ProductTypeConstant } from '../product/product.constants'
 
-export type ProductTypeModelProps = { name: string } & BaseModelProps
+export type ProductTypeModelProps = {
+  name: ProductTypeConstant
+} & BaseModelProps
 
 export class ProductTypeModel
   extends BaseModel
   implements ProductTypeModelProps
 {
-  name: string
+  name: ProductTypeConstant
 
   constructor(props: ProductTypeModelProps) {
     super(props)
