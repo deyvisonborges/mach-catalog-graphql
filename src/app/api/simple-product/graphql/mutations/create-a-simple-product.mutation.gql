@@ -1,0 +1,27 @@
+mutation {
+  createSimpleProduct(
+    input: {
+      size: "xl"
+      weight: 12
+      material: "linho"
+      product: {
+        name: "Product"
+        description: "some description"
+        sku: "2323we"
+        salePrice: 12
+        costPrice: 12
+        promotionalPrice: 12
+        thumbnail: "/thumb"
+        productType: { name: "VIRTUAL_PRODUCT" }
+      }
+    }
+  ) {
+    size
+    weight
+    material
+    product {
+      name
+      description
+    }
+  }
+}

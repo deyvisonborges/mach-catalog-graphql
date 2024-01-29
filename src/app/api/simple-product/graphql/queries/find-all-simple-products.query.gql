@@ -1,0 +1,19 @@
+query {
+  findAllSimpleProduct {
+    size
+    weight
+    material
+    product {
+      name
+      description
+      sku
+      salePrice
+      costPrice
+      promotionalPrice
+      thumbnail
+      productType {
+        name
+      }
+    }
+  }
+}

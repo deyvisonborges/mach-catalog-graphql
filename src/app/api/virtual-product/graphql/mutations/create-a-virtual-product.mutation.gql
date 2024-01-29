@@ -1,0 +1,23 @@
+mutation {
+  createVirtualProduct(
+    input: {
+      downloand_link: "downloadlink.com"
+      product: {
+        name: "Product"
+        description: "some description"
+        sku: "123123"
+        salePrice: 12
+        costPrice: 12
+        promotionalPrice: 12
+        thumbnail: "/thumb"
+        productType: { name: "SIMPLE_PRODUCT" }
+      }
+    }
+  ) {
+    # downloand_link as downloadLink
+    product {
+      name
+      description
+    }
+  }
+}

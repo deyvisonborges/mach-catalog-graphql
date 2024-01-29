@@ -1,6 +1,6 @@
 import { Field, ObjectType } from '@nestjs/graphql'
 import { VirtualProductModelProps } from '../../../../core/artifacts/virtual-product/virtual-product.model'
-import { ProductObject } from './product.object'
+import { ProductObject } from '../../product/graphql/product.object'
 import { ProductModelProps } from 'src/core/artifacts/product/product.model'
 
 @ObjectType()

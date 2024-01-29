@@ -1,6 +1,6 @@
 import { createUnionType } from '@nestjs/graphql'
-import { SimpleProductObject } from './objects/simple-product.object'
-import { VirtualProductObject } from './objects/virtual-product.object'
+import { SimpleProductObject } from '../../simple-product/graphql/simple-product.object'
+import { VirtualProductObject } from '../../virtual-product/graphql/virtual-product.object'
 
 export const ProductsUnion = createUnionType({
   name: 'Products',

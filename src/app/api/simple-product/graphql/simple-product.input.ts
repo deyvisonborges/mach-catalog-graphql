@@ -1,7 +1,7 @@
 import { Field, Float, InputType } from '@nestjs/graphql'
 import { ProductModelProps } from 'src/core/artifacts/product/product.model'
 import { SimpleProductModelProps } from 'src/core/artifacts/simple-product/simple-product.model'
-import { ProductInput } from './product.input'
+import { ProductInput } from '../../product/graphql/product.input'
 
 @InputType()
 export class SimpleProductInput implements SimpleProductModelProps {
