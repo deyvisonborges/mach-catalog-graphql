@@ -10,7 +10,7 @@ mutation {
         costPrice: 12
         promotionalPrice: 12
         thumbnail: "/thumb"
-        productType: { name: "SIMPLE_PRODUCT" }
+        productType: { name: "VIRTUAL_PRODUCT" }
       }
     }
   ) {

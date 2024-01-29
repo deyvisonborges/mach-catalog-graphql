@@ -32,20 +32,17 @@ import { CreateAVirtualProductService } from 'src/core/artifacts/virtual-product
       provide: FindAllProductsService,
       useFactory: (
         productRepository: ProductInMemoryRepository,
-        productTypeReposutory: ProductTypeInMemoryRepository,
         simpleProductRepository: SimpleProductInMemoryRepository,
         virtualProductRepository: VirtualProductInMemoryRepository
       ) => {
         return new FindAllProductsService(
           productRepository,
-          productTypeReposutory,
           simpleProductRepository,
           virtualProductRepository
         )
       },
       inject: [
         ProductInMemoryRepository,
-        ProductTypeInMemoryRepository,
         SimpleProductInMemoryRepository,
         VirtualProductInMemoryRepository
       ]
@@ -55,9 +52,19 @@ import { CreateAVirtualProductService } from 'src/core/artifacts/virtual-product
       provide: CreateASimpleProductService,
       useFactory: (
         repository: SimpleProductInMemoryRepository,
-        productRepository: ProductInMemoryRepository
-      ) => new CreateASimpleProductService(repository, productRepository),
-      inject: [SimpleProductInMemoryRepository, ProductInMemoryRepository]
+        productRepository: ProductInMemoryRepository,
+        productTypeReposutory: ProductTypeInMemoryRepository
+      ) =>
+        new CreateASimpleProductService(
+          repository,
+          productRepository,
+          productTypeReposutory
+        ),
+      inject: [
+        SimpleProductInMemoryRepository,
+        ProductInMemoryRepository,
+        ProductTypeInMemoryRepository
+      ]
     },
     {
       provide: FindAllSimpleProductsService,

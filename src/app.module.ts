@@ -5,7 +5,7 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo'
 import { ConfigModule } from './app/config/config.module'
 import { ApiModule } from './app/api/api.module'
 import { IntegrationsModule } from './app/integrations/integrations.module'
-import { DatabaseModule } from './app/database/database.module'
+// import { DatabaseModule } from './app/database/database.module'
 import path from 'path'
 
 @Module({
@@ -16,8 +16,8 @@ import path from 'path'
     }),
     ConfigModule.forRoot(),
     ApiModule,
-    IntegrationsModule,
-    DatabaseModule
+    IntegrationsModule
+    // DatabaseModule
   ],
   providers: [AppResolver]
 })

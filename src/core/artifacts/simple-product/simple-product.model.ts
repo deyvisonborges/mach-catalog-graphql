@@ -19,7 +19,7 @@ export class SimpleProductModel
 
   constructor(props: SimpleProductModelProps) {
     super(props)
-    Object.assign(this, { ...props, type: 'SIMPLE_PRODUCT' })
+    Object.assign(this, props)
   }
 
   create(props: SimpleProductModelProps): SimpleProductModelProps {

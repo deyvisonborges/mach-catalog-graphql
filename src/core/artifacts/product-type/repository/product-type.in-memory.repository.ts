@@ -4,4 +4,12 @@ import { ProductTypeRepositoryContract } from './product-type.repository.contrac
 
 export class ProductTypeInMemoryRepository
   extends InMemoryBaseRepository<ProductTypeModelProps>
-  implements ProductTypeRepositoryContract {}
+  implements ProductTypeRepositoryContract
+{
+  async findByName(name: string): Promise<ProductTypeModelProps | null> {
+    const foundProduct = this.items.find(
+      product => product.name.toLowerCase() === name.toLowerCase()
+    )
+    return foundProduct || null
+  }
+}
