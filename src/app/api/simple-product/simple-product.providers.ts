@@ -47,9 +47,11 @@ const services = [
   },
   {
     provide: FindAllSimpleProductsService,
-    useFactory: (repository: SimpleProductPrismaRepository) =>
-      new FindAllSimpleProductsService(repository),
-    inject: [SimpleProductPrismaRepository]
+    useFactory: (
+      productRepository: ProductPrismaRepository,
+      repository: SimpleProductPrismaRepository
+    ) => new FindAllSimpleProductsService(productRepository, repository),
+    inject: [ProductPrismaRepository, SimpleProductPrismaRepository]
   }
 ]
 

@@ -30,7 +30,7 @@ export class SimpleProductPrismaRepository
   findById(entityId: string): Promise<SimpleProductRepositoryType> {
     throw new Error('Method not implemented.')
   }
-  findAll(): Promise<SimpleProductRepositoryType[]> {
-    throw new Error('Method not implemented.')
+  async findAll(): Promise<SimpleProductRepositoryType[]> {
+    return await this.prismaService.simpleProduct.findMany()
   }
 }
