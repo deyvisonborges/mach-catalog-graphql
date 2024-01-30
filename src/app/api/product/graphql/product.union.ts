@@ -1,23 +1,28 @@
 import { createUnionType } from '@nestjs/graphql'
-import { SimpleProductObject } from '../../simple-product/graphql/simple-product.object'
 import { VirtualProductObject } from '../../virtual-product/graphql/virtual-product.object'
-import { ProductTypeConstant } from 'src/core/artifacts/product/product.constants'
+import { SimpleProductObject } from '../../simple-product/graphql/simple-product.object'
+import { SimpleProductOutput } from '../../simple-product/graphql/simple-product.output'
+import { VirtualProductOutput } from '../../virtual-product/virtual-product.output'
+import { ProductsOutput } from './products.output'
+
+function getPropertyValue(obj1, dataToRetrieve) {
+  return dataToRetrieve
+    .split('.') // split string based on `.`
+    .reduce(function (o, k) {
+      return o && o[k] // get inner property if `o` is defined else get `o` and return
+    }, obj1) // set initial value as object
+}
+
+const types = {
+  SIMPLE_PRODUCT: SimpleProductOutput,
+  VIRTUAL_PRODUCT: VirtualProductOutput
+}
 
 export const ProductsUnion = createUnionType({
   name: 'Products',
-  types: () => [SimpleProductObject, VirtualProductObject] as const,
+  types: () => [SimpleProductOutput, VirtualProductOutput] as const,
   resolveType: value => {
-    const type: ProductTypeConstant = null
-    if (value.product.productType.name) {
-      switch (type) {
-        case `SIMPLE_PRODUCT`:
-          return SimpleProductObject
-        case `VIRTUAL_PRODUCT`:
-          return VirtualProductObject
-        default:
-          return null
-      }
-    }
-    return null
+    const type = getPropertyValue(value, 'productType').name
+    return types[type] || null
   }
 })

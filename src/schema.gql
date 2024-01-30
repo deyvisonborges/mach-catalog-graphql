@@ -2,6 +2,10 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type ProductTypeObject {
+  name: String!
+}
+
 type SimpleProductObject {
   size: String!
   weight: Float!
@@ -28,17 +32,39 @@ type VirtualProductObject {
   productTypeId: String!
 }
 
-type ProductTypeObject {
-  name: String!
-}
-
 type Query {
   hello: String!
   findAll: [Products!]!
   findAllSimpleProduct: [SimpleProductObject!]!
 }
 
-union Products = SimpleProductObject | VirtualProductObject
+union Products = SimpleProductOutput | VirtualProductOutput
+
+type SimpleProductOutput {
+  productType: ProductTypeObject!
+  size: String!
+  weight: Float!
+  material: String!
+  name: String!
+  description: String!
+  sku: String!
+  salePrice: Float!
+  costPrice: Float!
+  promotionalPrice: Float!
+  thumbnail: String!
+}
+
+type VirtualProductOutput {
+  downloadLink: String!
+  productType: ProductTypeObject!
+  name: String!
+  description: String!
+  sku: String!
+  salePrice: Float!
+  costPrice: Float!
+  promotionalPrice: Float!
+  thumbnail: String!
+}
 
 type Mutation {
   createSimpleProduct(input: SimpleProductInput!): SimpleProductObject!

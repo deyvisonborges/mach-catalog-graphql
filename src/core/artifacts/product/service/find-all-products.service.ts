@@ -30,7 +30,7 @@ export class FindAllProductsService
     private readonly productTypeRepository: ProductTypeRepositoryContract
   ) {}
 
-  async execute(): Promise<any[]> {
+  async execute(): Promise<FindAllProductsServiceOutput[]> {
     const [products, productSimple, productVirtual, productTypes] =
       await Promise.all([
         this.productRepository.findAll(),
@@ -84,7 +84,6 @@ export class FindAllProductsService
       return productWithDetails
     })
 
-    console.log(productsAndTypes)
     return productsAndTypes
   }
 }

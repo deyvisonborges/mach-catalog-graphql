@@ -1,0 +1,7 @@
+mutation {
+  createProductType(input: {
+    name: "VIRTUAL_PRODUCT"
+  }) {
+    name
+  }
+}

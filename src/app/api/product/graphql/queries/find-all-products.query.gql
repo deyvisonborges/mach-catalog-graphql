@@ -1,36 +1,32 @@
 query {
   findAll {
-    ... on SimpleProductObject {
+    ... on SimpleProductOutput {
+      name
+      description
+      sku
+      salePrice
+      costPrice
+      promotionalPrice
+      thumbnail
       size
       weight
       material
-      product {
+      productType {
         name
-        description
-        sku
-        salePrice
-        costPrice
-        promotionalPrice
-        thumbnail
-        productType {
-          name
-        }
       }
     }
-    ... on VirtualProductObject {
-      downloand_link
-      product {
+  	... on VirtualProductOutput {
+      name
+      description
+      sku
+      salePrice
+      costPrice
+      promotionalPrice
+      thumbnail
+      downloadLink
+      productType {
         name
-        description
-        sku
-        salePrice
-        costPrice
-        promotionalPrice
-        thumbnail
-        productType {
-          name
-        }
       }
     }
-  }
+  }	
 }
