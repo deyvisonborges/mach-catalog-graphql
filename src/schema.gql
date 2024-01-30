@@ -2,8 +2,11 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type ProductTypeObject {
-  name: String!
+type SimpleProductObject {
+  size: String!
+  weight: Float!
+  material: String!
+  productId: String!
 }
 
 type ProductObject {
@@ -14,19 +17,16 @@ type ProductObject {
   costPrice: Float!
   promotionalPrice: Float!
   thumbnail: String!
-  productType: ProductTypeObject!
-}
-
-type SimpleProductObject {
-  size: String!
-  weight: Float!
-  material: String!
-  product: ProductObject!
+  productTypeId: String!
 }
 
 type VirtualProductObject {
   downloand_link: String!
   product: ProductObject!
+}
+
+type ProductTypeObject {
+  name: String!
 }
 
 type Query {
@@ -44,14 +44,21 @@ type Mutation {
 }
 
 input SimpleProductInput {
-  """Define a product size"""
   size: String!
-
-  """Define a product weight"""
   weight: Float!
-
-  """Define product material"""
   material: String!
+  name: String!
+  description: String!
+  sku: String!
+  salePrice: Float!
+  costPrice: Float!
+  promotionalPrice: Float!
+  thumbnail: String!
+  productTypeId: String!
+}
+
+input VirtualProductInput {
+  downloand_link: String!
   product: ProductInput!
 }
 
@@ -63,14 +70,9 @@ input ProductInput {
   costPrice: Float!
   promotionalPrice: Float!
   thumbnail: String!
-  productType: ProductTypeInput!
+  productTypeId: String!
 }
 
 input ProductTypeInput {
   name: String!
-}
-
-input VirtualProductInput {
-  downloand_link: String!
-  product: ProductInput!
 }

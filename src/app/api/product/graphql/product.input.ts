@@ -1,7 +1,5 @@
 import { Field, InputType } from '@nestjs/graphql'
 import { ProductModelProps } from 'src/core/artifacts/product/product.model'
-import { ProductTypeModelProps } from 'src/core/artifacts/product-type/product-type.model'
-import { ProductTypeInput } from '../../product-type/graphql/product-type.input'
 
 @InputType()
 export class ProductInput implements ProductModelProps {
@@ -26,6 +24,6 @@ export class ProductInput implements ProductModelProps {
   @Field()
   thumbnail: string
 
-  @Field(() => ProductTypeInput)
-  productType: ProductTypeModelProps
+  @Field(() => String)
+  productTypeId: string
 }

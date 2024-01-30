@@ -1,5 +1,4 @@
 import { BaseModel, BaseModelProps } from '../../../core/common/base/model.base'
-import { ProductTypeModelProps } from '../product-type/product-type.model'
 
 export type ProductModelProps = {
   name: string
@@ -9,7 +8,7 @@ export type ProductModelProps = {
   costPrice: number
   promotionalPrice: number
   thumbnail: string
-  productType: ProductTypeModelProps
+  productTypeId: string
 } & BaseModelProps
 
 export class ProductModel extends BaseModel implements ProductModelProps {
@@ -20,7 +19,7 @@ export class ProductModel extends BaseModel implements ProductModelProps {
   costPrice: number
   promotionalPrice: number
   thumbnail: string
-  productType: ProductTypeModelProps
+  productTypeId: string
 
   constructor(props: ProductModelProps) {
     super(props)

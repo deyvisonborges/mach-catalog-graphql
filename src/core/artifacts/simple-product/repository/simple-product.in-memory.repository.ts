@@ -8,7 +8,7 @@ export class SimpleProductInMemoryRepository
 {
   async findByProductId(productId: string): Promise<SimpleProductModelProps> {
     return await this.items.find(result =>
-      result.product.id === productId ? result : null
+      result.productId === productId ? result : null
     )
   }
 }

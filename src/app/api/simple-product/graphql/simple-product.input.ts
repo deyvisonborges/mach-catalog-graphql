@@ -1,19 +1,38 @@
 import { Field, Float, InputType } from '@nestjs/graphql'
-import { ProductModelProps } from 'src/core/artifacts/product/product.model'
-import { SimpleProductModelProps } from 'src/core/artifacts/simple-product/simple-product.model'
-import { ProductInput } from '../../product/graphql/product.input'
+import { CreateASimpleProductServiceInput } from 'src/core/artifacts/simple-product/service/create-a-simple-product.service'
 
 @InputType()
-export class SimpleProductInput implements SimpleProductModelProps {
-  @Field(() => String, { description: 'Define a product size' })
+export class SimpleProductInput implements CreateASimpleProductServiceInput {
+  @Field(() => String)
   size: string
 
-  @Field(() => Float, { description: 'Define a product weight' })
+  @Field(() => Float)
   weight: number
 
-  @Field(() => String, { description: 'Define product material' })
+  @Field(() => String)
   material: string
 
-  @Field(() => ProductInput)
-  product: ProductModelProps
+  @Field(() => String)
+  name: string
+
+  @Field(() => String)
+  description: string
+
+  @Field(() => String)
+  sku: string
+
+  @Field(() => Float)
+  salePrice: number
+
+  @Field(() => Float)
+  costPrice: number
+
+  @Field(() => Float)
+  promotionalPrice: number
+
+  @Field(() => String)
+  thumbnail: string
+
+  @Field(() => String)
+  productTypeId: string
 }

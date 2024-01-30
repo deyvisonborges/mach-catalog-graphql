@@ -10,8 +10,7 @@ export class ProductPrismaRepository implements ProductRepositoryContract {
 
   async findProductBySku(sku: string): Promise<ProductModelProps> {
     const product = await this.prismaService.product.findFirst({
-      where: { sku: sku },
-      include: { productType: true }
+      where: { sku: sku }
     })
     return product || null
   }
@@ -27,9 +26,8 @@ export class ProductPrismaRepository implements ProductRepositoryContract {
         sku: entity.sku,
         thumbnail: entity.thumbnail,
         id: entity.id,
-        productTypeId: entity.productType.id
-      },
-      include: { productType: true }
+        productTypeId: entity.productTypeId
+      }
     })
   }
 

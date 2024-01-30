@@ -1,19 +1,17 @@
-import { Field, ObjectType } from '@nestjs/graphql'
-import { ProductModelProps } from 'src/core/artifacts/product/product.model'
+import { Field, Float, ObjectType } from '@nestjs/graphql'
 import { SimpleProductModelProps } from 'src/core/artifacts/simple-product/simple-product.model'
-import { ProductObject } from '../../product/graphql/product.object'
 
 @ObjectType()
 export class SimpleProductObject implements SimpleProductModelProps {
-  @Field()
+  @Field(() => String)
   size: string
 
-  @Field()
+  @Field(() => Float)
   weight: number
 
-  @Field()
+  @Field(() => String)
   material: string
 
-  @Field(() => ProductObject)
-  product: ProductModelProps
+  @Field(() => String)
+  productId: string
 }
