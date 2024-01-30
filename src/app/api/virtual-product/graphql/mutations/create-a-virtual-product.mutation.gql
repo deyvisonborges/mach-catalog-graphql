@@ -1,23 +1,23 @@
 mutation {
-  createVirtualProduct(
-    input: {
-      downloand_link: "downloadlink.com"
-      product: {
-        name: "Product"
-        description: "some description"
-        sku: "123123"
-        salePrice: 12
-        costPrice: 12
-        promotionalPrice: 12
-        thumbnail: "/thumb"
-        productType: { name: "SIMPLE_PRODUCT" }
-      }
-    }
-  ) {
-    # downloand_link as downloadLink
-    product {
-      name
-      description
-    }
+  createVirtualProduct(input: {
+		downloadLink: "/link"
+    name: "Gift Card"
+    description: "Free Fire Points"
+    sku: "GIFT2NN31"
+    salePrice: 9.90
+    costPrice: 9.90
+    promotionalPrice: 0.00
+    thumbnail: "url-gift"
+    productTypeId: "dfac675a-2af3-41ff-8085-2abee41960ae"
+  }){
+    downloadLink
+		productTypeId
+    name
+    description
+    sku
+    salePrice
+    costPrice
+    promotionalPrice
+    thumbnail
   }
 }

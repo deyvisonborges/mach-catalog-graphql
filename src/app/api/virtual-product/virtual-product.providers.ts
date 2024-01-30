@@ -1,15 +1,27 @@
-import { ProductInMemoryRepository } from 'src/core/artifacts/product/repository/product.in-memory.repository'
-import { VirtualProductInMemoryRepository } from 'src/core/artifacts/virtual-product/repository/virtual-product.in-memory.repository'
 import { CreateAVirtualProductService } from 'src/core/artifacts/virtual-product/service/create-a-virtual-product.service'
+import { VirtualProductPrismaRepository } from './virtual-product.prisma.repository'
+import { PrismaService } from 'src/app/database/prisma/prisma.service'
+import { ProductPrismaRepository } from '../product/product.prisma.repository'
+import { ProductTypePrismaRepository } from '../product-type/product-type.prisma.repository'
 
 const repositories = [
   {
-    provide: VirtualProductInMemoryRepository,
-    useFactory: () => new VirtualProductInMemoryRepository()
+    provide: VirtualProductPrismaRepository,
+    useFactory: (prismaService: PrismaService) =>
+      new VirtualProductPrismaRepository(prismaService),
+    inject: [PrismaService]
   },
   {
-    provide: ProductInMemoryRepository,
-    useFactory: () => new ProductInMemoryRepository()
+    provide: ProductPrismaRepository,
+    useFactory: (prismaService: PrismaService) =>
+      new ProductPrismaRepository(prismaService),
+    inject: [PrismaService]
+  },
+  {
+    provide: ProductTypePrismaRepository,
+    useFactory: (prismaService: PrismaService) =>
+      new ProductTypePrismaRepository(prismaService),
+    inject: [PrismaService]
   }
 ]
 
@@ -17,15 +29,21 @@ const services = [
   {
     provide: CreateAVirtualProductService,
     useFactory: (
-      virtualProductRepository: VirtualProductInMemoryRepository,
-      productRepository: ProductInMemoryRepository
+      virtualProductRepository: VirtualProductPrismaRepository,
+      productRepository: ProductPrismaRepository,
+      productTypeRepository: ProductTypePrismaRepository
     ) => {
       return new CreateAVirtualProductService(
         virtualProductRepository,
-        productRepository
+        productRepository,
+        productTypeRepository
       )
     },
-    inject: [VirtualProductInMemoryRepository, ProductInMemoryRepository]
+    inject: [
+      VirtualProductPrismaRepository,
+      ProductPrismaRepository,
+      ProductTypePrismaRepository
+    ]
   }
 ]
 

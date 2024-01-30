@@ -1,9 +1,10 @@
-import { ProductInMemoryRepository } from 'src/core/artifacts/product/repository/product.in-memory.repository'
 import { FindAllProductsService } from 'src/core/artifacts/product/service/find-all-products.service'
-import { SimpleProductInMemoryRepository } from 'src/core/artifacts/simple-product/repository/simple-product.in-memory.repository'
 import { VirtualProductInMemoryRepository } from 'src/core/artifacts/virtual-product/repository/virtual-product.in-memory.repository'
 import { ProductPrismaRepository } from './product.prisma.repository'
 import { PrismaService } from 'src/app/database/prisma/prisma.service'
+import { SimpleProductPrismaRepository } from '../simple-product/simple-product.prisma.repository'
+import { ProductTypePrismaRepository } from '../product-type/product-type.prisma.repository'
+import { VirtualProductPrismaRepository } from '../virtual-product/virtual-product.prisma.repository'
 
 const repositories = [
   {
@@ -13,12 +14,22 @@ const repositories = [
     inject: [PrismaService]
   },
   {
-    provide: SimpleProductInMemoryRepository,
-    useFactory: () => new SimpleProductInMemoryRepository()
+    provide: SimpleProductPrismaRepository,
+    useFactory: (prismaService: PrismaService) =>
+      new SimpleProductPrismaRepository(prismaService),
+    inject: [PrismaService]
   },
   {
-    provide: VirtualProductInMemoryRepository,
-    useFactory: () => new VirtualProductInMemoryRepository()
+    provide: VirtualProductPrismaRepository,
+    useFactory: (prismaService: PrismaService) =>
+      new VirtualProductPrismaRepository(prismaService),
+    inject: [PrismaService]
+  },
+  {
+    provide: ProductTypePrismaRepository,
+    useFactory: (prismaService: PrismaService) =>
+      new ProductTypePrismaRepository(prismaService),
+    inject: [PrismaService]
   }
 ]
 
@@ -27,19 +38,22 @@ const services = [
     provide: FindAllProductsService,
     useFactory: (
       productRepository: ProductPrismaRepository,
-      simpleProductRepository: SimpleProductInMemoryRepository,
-      virtualProductRepository: VirtualProductInMemoryRepository
+      simpleProductRepository: SimpleProductPrismaRepository,
+      virtualProductRepository: VirtualProductPrismaRepository,
+      productTypeRepository: ProductTypePrismaRepository
     ) => {
       return new FindAllProductsService(
         productRepository,
         simpleProductRepository,
-        virtualProductRepository
+        virtualProductRepository,
+        productTypeRepository
       )
     },
     inject: [
       ProductPrismaRepository,
-      SimpleProductInMemoryRepository,
-      VirtualProductInMemoryRepository
+      SimpleProductPrismaRepository,
+      VirtualProductPrismaRepository,
+      ProductTypePrismaRepository
     ]
   }
 ]

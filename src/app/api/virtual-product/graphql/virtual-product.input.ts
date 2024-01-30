@@ -1,13 +1,32 @@
-import { Field, InputType } from '@nestjs/graphql'
-import { ProductModelProps } from 'src/core/artifacts/product/product.model'
-import { VirtualProductModelProps } from 'src/core/artifacts/virtual-product/virtual-product.model'
-import { ProductInput } from '../../product/graphql/product.input'
+import { Field, Float, InputType } from '@nestjs/graphql'
+import { CreateAVirtualProductServiceInput } from 'src/core/artifacts/virtual-product/service/create-a-virtual-product.service'
 
 @InputType()
-export class VirtualProductInput implements VirtualProductModelProps {
-  @Field(() => String, { name: 'downloand_link' })
+export class VirtualProductInput implements CreateAVirtualProductServiceInput {
+  @Field(() => String)
   downloadLink: string
 
-  @Field(() => ProductInput)
-  product: ProductModelProps
+  @Field(() => String)
+  name: string
+
+  @Field(() => String)
+  description: string
+
+  @Field(() => String)
+  sku: string
+
+  @Field(() => Float)
+  salePrice: number
+
+  @Field(() => Float)
+  costPrice: number
+
+  @Field(() => Float)
+  promotionalPrice: number
+
+  @Field(() => String)
+  thumbnail: string
+
+  @Field(() => String)
+  productTypeId: string
 }

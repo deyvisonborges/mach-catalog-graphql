@@ -1,17 +1,14 @@
-import { BaseModel, BaseModelProps } from '../../../core/common/base/model.base'
-import { ProductModelProps } from '../product/product.model'
+import { ProductModel, ProductModelProps } from '../product/product.model'
 
 export type VirtualProductModelProps = {
   downloadLink: string
-  product: ProductModelProps
-} & BaseModelProps
+} & ProductModelProps
 
 export class VirtualProductModel
-  extends BaseModel
+  extends ProductModel<VirtualProductModelProps>
   implements VirtualProductModelProps
 {
   downloadLink: string
-  product: ProductModelProps
 
   constructor(props: VirtualProductModelProps) {
     super(props)

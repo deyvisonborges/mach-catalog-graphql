@@ -35,16 +35,4 @@ export class SimpleProductObject implements SimpleProductModelProps {
 
   @Field()
   thumbnail: string
-
-  @Field()
-  id?: string
-
-  @Field()
-  active?: boolean
-
-  @Field()
-  createdAt?: Date
-
-  @Field()
-  updatedAt?: Date
 }

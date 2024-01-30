@@ -32,9 +32,7 @@ export class ProductPrismaRepository implements ProductRepositoryContract {
   }
 
   async findAll(): Promise<ProductModelProps[]> {
-    return await this.prismaService.product.findMany({
-      include: { productType: true }
-    })
+    return await this.prismaService.product.findMany()
   }
 
   createMany(entity: ProductModelProps[]): Promise<ProductModelProps[]> {

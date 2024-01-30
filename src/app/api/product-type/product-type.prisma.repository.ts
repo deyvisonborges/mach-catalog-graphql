@@ -44,7 +44,7 @@ export class ProductTypePrismaRepository
     return productType || null
   }
 
-  findAll(): Promise<ProductTypeModelProps[]> {
-    throw new Error('Method not implemented.')
+  async findAll(): Promise<ProductTypeModelProps[]> {
+    return await this.prismaService.productType.findMany()
   }
 }

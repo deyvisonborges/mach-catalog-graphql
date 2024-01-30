@@ -1,7 +1,7 @@
 import { InMemoryBaseRepository } from '../../../common/base/in-memory-repository.base'
-import { VirtualProductModelProps } from '../virtual-product.model'
 import { VirtualProductRepositoryContract } from './virtual-product.repository.contract'
+import { VirtualProductRepositoryType } from './virtual-product.repository.type'
 
 export class VirtualProductInMemoryRepository
-  extends InMemoryBaseRepository<VirtualProductModelProps>
+  extends InMemoryBaseRepository<VirtualProductRepositoryType>
   implements VirtualProductRepositoryContract {}
