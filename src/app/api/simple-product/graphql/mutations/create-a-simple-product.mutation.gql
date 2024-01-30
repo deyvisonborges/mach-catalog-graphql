@@ -1,27 +1,27 @@
 mutation {
-  createSimpleProduct(
-    input: {
-      size: "xl"
-      weight: 12
-      material: "linho"
-      product: {
-        name: "Product"
-        description: "some description"
-        sku: "2323we"
-        salePrice: 12
-        costPrice: 12
-        promotionalPrice: 12
-        thumbnail: "/thumb"
-        productType: { name: "VIRTUAL_PRODUCT" }
-      }
-    }
-  ) {
+  createSimpleProduct(input: {
+    size: "M"
+    weight: 12
+    material: "Tactel"
+    name: "Calça Masculina"
+    description: "Modelo personalizado"
+    sku: "CALM12C1232"
+    salePrice: 39.90
+    costPrice: 29.90
+    promotionalPrice: 0.00
+    thumbnail: "minha-url"
+    productTypeId: "cf575e12-671a-43b1-bb9b-8f0e6f6430bf"
+  }){
     size
     weight
     material
-    product {
-      name
-      description
-    }
+		productTypeId
+    name
+    description
+    sku
+    salePrice
+    costPrice
+    promotionalPrice
+    thumbnail
   }
 }

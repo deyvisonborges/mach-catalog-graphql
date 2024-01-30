@@ -11,7 +11,10 @@ export type ProductModelProps = {
   productTypeId: string
 } & BaseModelProps
 
-export class ProductModel extends BaseModel implements ProductModelProps {
+export abstract class ProductModel<T extends ProductModelProps>
+  extends BaseModel
+  implements ProductModelProps
+{
   name: string
   description: string
   sku: string
@@ -21,12 +24,5 @@ export class ProductModel extends BaseModel implements ProductModelProps {
   thumbnail: string
   productTypeId: string
 
-  constructor(props: ProductModelProps) {
-    super(props)
-    Object.assign(this, props)
-  }
-
-  create(props: ProductModelProps): ProductModelProps {
-    return new ProductModel(props)
-  }
+  abstract create(props: T): T
 }

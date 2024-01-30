@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { PrismaService } from 'src/app/database/prisma/prisma.service'
 import { SimpleProductRepositoryContract } from 'src/core/artifacts/simple-product/repository/simple-product.repository.contract'
-import { SimpleProductModelProps } from 'src/core/artifacts/simple-product/simple-product.model'
+import { SimpleProductRepositoryType } from 'src/core/artifacts/simple-product/repository/simple-product.repository.type'
 
 @Injectable()
 export class SimpleProductPrismaRepository
@@ -10,32 +10,27 @@ export class SimpleProductPrismaRepository
   constructor(private readonly prismaService: PrismaService) {}
 
   async createOne(
-    entity: SimpleProductModelProps
-  ): Promise<SimpleProductModelProps> {
+    entity: SimpleProductRepositoryType
+  ): Promise<SimpleProductRepositoryType> {
     return await this.prismaService.simpleProduct.create({
-      data: {
-        material: entity.material,
-        size: entity.size,
-        weight: entity.weight,
-        productId: entity.productId
-      }
+      data: entity
     })
   }
   createMany(
-    entity: SimpleProductModelProps[]
-  ): Promise<SimpleProductModelProps[]> {
+    entity: SimpleProductRepositoryType[]
+  ): Promise<SimpleProductRepositoryType[]> {
     throw new Error('Method not implemented.')
   }
-  update(entity: SimpleProductModelProps): Promise<void> {
+  update(entity: SimpleProductRepositoryType): Promise<void> {
     throw new Error('Method not implemented.')
   }
   delete(entityId: string): Promise<void> {
     throw new Error('Method not implemented.')
   }
-  findById(entityId: string): Promise<SimpleProductModelProps> {
+  findById(entityId: string): Promise<SimpleProductRepositoryType> {
     throw new Error('Method not implemented.')
   }
-  findAll(): Promise<SimpleProductModelProps[]> {
+  findAll(): Promise<SimpleProductRepositoryType[]> {
     throw new Error('Method not implemented.')
   }
 }

@@ -1,20 +1,18 @@
-import { BaseModel, BaseModelProps } from '../../../core/common/base/model.base'
+import { ProductModel, ProductModelProps } from '../product/product.model'
 
 export type SimpleProductModelProps = {
   size: string
   weight: number
   material: string
-  productId: string
-} & BaseModelProps
+} & ProductModelProps
 
 export class SimpleProductModel
-  extends BaseModel
+  extends ProductModel<SimpleProductModelProps>
   implements SimpleProductModelProps
 {
   size: string
   weight: number
   material: string
-  productId: string
 
   constructor(props: SimpleProductModelProps) {
     super(props)

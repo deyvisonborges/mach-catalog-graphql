@@ -4,12 +4,11 @@ import { SimpleProductRepositoryContract } from '../repository/simple-product.re
 import { ProductRepositoryContract } from '../../product/repository/product.repository.contract'
 import { ProductTypeRepositoryContract } from '../../product-type/repository/product-type.repository.contract'
 import { BaseModelProps } from 'src/core/common/base/model.base'
-import { ProductModelProps } from '../../product/product.model'
 import { HttpException, HttpStatus } from '@nestjs/common'
 
 export type CreateASimpleProductServiceInput = Omit<
-  SimpleProductModelProps & ProductModelProps,
-  keyof BaseModelProps | 'productId'
+  SimpleProductModelProps,
+  keyof BaseModelProps
 >
 
 export class CreateASimpleProductService
@@ -52,9 +51,16 @@ export class CreateASimpleProductService
       ...input
     })
 
-    return await this.repository.createOne({
-      ...input,
-      productId: product.id
+    const createdSimpleProduct = await this.repository.createOne({
+      material: input.material,
+      productId: product.id,
+      size: input.size,
+      weight: input.weight
     })
+
+    return {
+      ...product,
+      ...createdSimpleProduct
+    }
   }
 }

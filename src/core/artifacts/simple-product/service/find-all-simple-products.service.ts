@@ -4,12 +4,13 @@ import { SimpleProductRepositoryContract } from '../repository/simple-product.re
 
 type Output = SimpleProductModelProps[]
 
+// TODO: ajustar o retorno do simple product find all
 export class FindAllSimpleProductsService
   implements BaseServiceContract<void, Output>
 {
   constructor(private readonly repository: SimpleProductRepositoryContract) {}
 
   async execute(): Promise<Output> {
-    return await this.repository.findAll()
+    return null
   }
 }

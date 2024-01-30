@@ -29,7 +29,7 @@ export class FindAllProductsService
     ])
 
     const productsAndTypes = products.map(product => {
-      const simpleProduct = productSimple.find(p => p.id === product.id)
+      const simpleProduct = productSimple.find(p => p.productId === product.id)
       const virtualProduct = productVirtual.find(p => p.id === product.id)
 
       const productAndType: any = {

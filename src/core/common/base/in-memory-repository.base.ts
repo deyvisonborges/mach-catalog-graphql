@@ -1,8 +1,6 @@
 import { BaseRepositoryContract } from './repository.contract.base'
 
-type Stub = { id?: string }
-
-export class InMemoryBaseRepository<M extends Stub>
+export class InMemoryBaseRepository<M extends Record<string, any>>
   implements BaseRepositoryContract<M>
 {
   items: M[] = []

@@ -1,5 +1,5 @@
 import { BaseRepositoryContract } from 'src/core/common/base/repository.contract.base'
-import { SimpleProductModelProps } from '../simple-product.model'
+import { SimpleProductRepositoryType } from './simple-product.repository.type'
 
 export type SimpleProductRepositoryContract =
-  BaseRepositoryContract<SimpleProductModelProps>
+  BaseRepositoryContract<SimpleProductRepositoryType>
