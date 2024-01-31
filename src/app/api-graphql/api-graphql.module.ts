@@ -12,4 +12,4 @@ import { ProductTypeModule } from './product-type/product-type.module'
     ProductTypeModule
   ]
 })
-export class ApiModule {}
+export class ApiGraphqlModule {}
