@@ -1,10 +1,5 @@
 import { EventEmitter2 } from '@nestjs/event-emitter'
-
-export interface DomainEventType {
-  aggregateId: string
-  occurredOn: string
-  eventVersion: string
-}
+import { DomainEventType } from './domain-event.type'
 
 export class EventEmitter {
   events: Set<DomainEventType> = new Set<DomainEventType>()
