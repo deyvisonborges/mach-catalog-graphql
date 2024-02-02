@@ -4,15 +4,19 @@ import { SimpleProductInput } from './simple-product.input'
 import { Inject } from '@nestjs/common'
 import { CreateASimpleProductService } from 'src/core/artifacts/simple-product/service/create-a-simple-product.service'
 import { FindAllSimpleProductsService } from 'src/core/artifacts/simple-product/service/find-all-simple-products.service'
+import { AmqpConnection } from '@golevelup/nestjs-rabbitmq'
 
 @Resolver(() => SimpleProductObject)
 export class SimpleProductResolver {
   @Inject() private readonly createASimpleProduct: CreateASimpleProductService
   @Inject() private readonly findAllSimpleProducts: FindAllSimpleProductsService
+  @Inject() private amqpConnection: AmqpConnection
 
   @Mutation(() => SimpleProductObject)
   async createSimpleProduct(@Args('input') input: SimpleProductInput) {
-    return await this.createASimpleProduct.execute(input)
+    const result = await this.createASimpleProduct.execute(input)
+    await this.amqpConnection.publish('amq.direct', 'ProductCreated', result)
+    return result
   }
 
   @Query(() => [SimpleProductObject])

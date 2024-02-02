@@ -6,4 +6,7 @@ export type ConfigEnvSchema = {
   POSTGRES_PASSWORD: string
   POSTGRES_NAME: string
   DATABASE_URL: string
+  RABBITMQ_USER: string
+  RABBITMQ_PASSWORD: string
+  RABBITMQ_CONNECTION: string
 }
