@@ -32,6 +32,11 @@ type VirtualProductObject {
   productTypeId: String!
 }
 
+type CategoryOutput {
+  name: String!
+  description: String!
+}
+
 type Query {
   hello: String!
   findAll: [Products!]!
@@ -70,6 +75,7 @@ type Mutation {
   createSimpleProduct(input: SimpleProductInput!): SimpleProductObject!
   createVirtualProduct(input: VirtualProductInput!): VirtualProductObject!
   createProductType(input: ProductTypeInput!): ProductTypeObject!
+  createCategory(input: CategoryInput!): CategoryOutput!
 }
 
 input SimpleProductInput {
@@ -100,4 +106,9 @@ input VirtualProductInput {
 
 input ProductTypeInput {
   name: String!
+}
+
+input CategoryInput {
+  name: String!
+  description: String!
 }

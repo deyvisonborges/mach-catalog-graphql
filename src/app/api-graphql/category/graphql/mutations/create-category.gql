@@ -1,0 +1,11 @@
+mutation {
+  createCategory(
+    input: {
+      name: "Eletrônicos"
+      description: "Computadores; Material de comunicação telefônica em geral"
+    }
+  ) {
+    name
+    description
+  }
+}

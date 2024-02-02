@@ -1,10 +1,7 @@
 import { Resolver, Query } from '@nestjs/graphql'
 import { ProductsUnion } from './product.union'
 import { Inject } from '@nestjs/common'
-import {
-  FindAllProductsService,
-  FindAllProductsServiceOutput
-} from 'src/core/artifacts/product/service/find-all-products.service'
+import { FindAllProductsService } from 'src/core/artifacts/product/service/find-all-products.service'
 import { ProductsOutput } from './products.output'
 
 @Resolver(() => ProductsUnion)
