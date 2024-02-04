@@ -2,6 +2,8 @@ import { Field, ObjectType } from '@nestjs/graphql'
 import { ProductTypeModelProps } from 'src/core/artifacts/product-type/product-type.model'
 import { SimpleProductModelProps } from 'src/core/artifacts/simple-product/simple-product.model'
 import { ProductTypeObject } from '../../product-type/graphql/product-type.object'
+import { CategoryModelProps } from 'src/core/artifacts/category/category.model'
+import { CategoryOutput } from '../../category/graphql/category.output'
 
 type Ouput = Omit<SimpleProductModelProps, 'productTypeId'> & {
   productType: ProductTypeModelProps
@@ -41,4 +43,7 @@ export class SimpleProductOutput implements Ouput {
 
   @Field()
   thumbnail: string
+
+  @Field(() => [CategoryOutput], { nullable: true })
+  categories: CategoryModelProps[]
 }

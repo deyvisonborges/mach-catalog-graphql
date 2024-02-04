@@ -10,7 +10,7 @@ mutation {
     costPrice: 29.90
     promotionalPrice: 0.00
     thumbnail: "minha-url"
-    productTypeId: "36d01918-8a11-412e-8e46-23ebcdf5ac5c"
+    productTypeId: "0d141801-1023-4d61-8cc4-29f8632e1ab9"
   }){
     size
     weight

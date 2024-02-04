@@ -1,10 +1,10 @@
 import { FindAllProductsService } from 'src/core/artifacts/product/service/find-all-products.service'
-import { VirtualProductInMemoryRepository } from 'src/core/artifacts/virtual-product/repository/virtual-product.in-memory.repository'
 import { ProductPrismaRepository } from './product.prisma.repository'
 import { PrismaService } from 'src/app/database/prisma/prisma.service'
 import { SimpleProductPrismaRepository } from '../simple-product/simple-product.prisma.repository'
 import { ProductTypePrismaRepository } from '../product-type/product-type.prisma.repository'
 import { VirtualProductPrismaRepository } from '../virtual-product/virtual-product.prisma.repository'
+import { ProductCategoryPrismaRepository } from 'src/core/common/repositories/product-category/product-category.prisma.repository'
 
 const repositories = [
   {
@@ -30,6 +30,12 @@ const repositories = [
     useFactory: (prismaService: PrismaService) =>
       new ProductTypePrismaRepository(prismaService),
     inject: [PrismaService]
+  },
+  {
+    provide: ProductCategoryPrismaRepository,
+    useFactory: (prismaService: PrismaService) =>
+      new ProductCategoryPrismaRepository(prismaService),
+    inject: [PrismaService]
   }
 ]
 
@@ -40,20 +46,23 @@ const services = [
       productRepository: ProductPrismaRepository,
       simpleProductRepository: SimpleProductPrismaRepository,
       virtualProductRepository: VirtualProductPrismaRepository,
-      productTypeRepository: ProductTypePrismaRepository
+      productTypeRepository: ProductTypePrismaRepository,
+      productCategoryRepository: ProductCategoryPrismaRepository
     ) => {
       return new FindAllProductsService(
         productRepository,
         simpleProductRepository,
         virtualProductRepository,
-        productTypeRepository
+        productTypeRepository,
+        productCategoryRepository
       )
     },
     inject: [
       ProductPrismaRepository,
       SimpleProductPrismaRepository,
       VirtualProductPrismaRepository,
-      ProductTypePrismaRepository
+      ProductTypePrismaRepository,
+      ProductCategoryPrismaRepository
     ]
   }
 ]

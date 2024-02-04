@@ -11,5 +11,24 @@ export class ProductResolver {
   @Query(() => [ProductsUnion])
   async findAll(): Promise<ProductsOutput[]> {
     return await this.findAllProducts.execute()
+
+    // const products = await this.productRepository.findAll()
+
+    // const productsWithCategories = await Promise.all(
+    //   products.map(async product => {
+    //     const categories =
+    //       await this.productCategoryRepository.findCategoriesByProductId(
+    //         product.id
+    //       )
+    //     return {
+    //       ...product,
+    //       categories: categories
+    //     }
+    //   })
+    // )
+
+    // return productsWithCategories
+
+    // @Field(() => [CategoryModelProps], { nullable: true })
   }
 }

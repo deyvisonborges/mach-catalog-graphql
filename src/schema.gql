@@ -6,6 +6,11 @@ type ProductTypeObject {
   name: String!
 }
 
+type CategoryOutput {
+  name: String!
+  description: String!
+}
+
 type SimpleProductObject {
   size: String!
   weight: Float!
@@ -32,11 +37,6 @@ type VirtualProductObject {
   productTypeId: String!
 }
 
-type CategoryOutput {
-  name: String!
-  description: String!
-}
-
 type Query {
   hello: String!
   findAll: [Products!]!
@@ -57,6 +57,7 @@ type SimpleProductOutput {
   costPrice: Float!
   promotionalPrice: Float!
   thumbnail: String!
+  categories: [CategoryOutput!]
 }
 
 type VirtualProductOutput {
@@ -69,6 +70,7 @@ type VirtualProductOutput {
   costPrice: Float!
   promotionalPrice: Float!
   thumbnail: String!
+  categories: [CategoryOutput!]
 }
 
 type Mutation {

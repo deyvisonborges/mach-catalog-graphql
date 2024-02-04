@@ -7,6 +7,18 @@ import { ProductRepositoryContract } from 'src/core/artifacts/product/repository
 @Injectable()
 export class ProductPrismaRepository implements ProductRepositoryContract {
   constructor(private readonly prismaService: PrismaService) {}
+  createMany(entity: ProductModelProps[]): Promise<ProductModelProps[]> {
+    throw new Error('Method not implemented.')
+  }
+  update(entity: ProductModelProps): Promise<void> {
+    throw new Error('Method not implemented.')
+  }
+  delete(entityId: string): Promise<void> {
+    throw new Error('Method not implemented.')
+  }
+  findById(entityId: string): Promise<ProductModelProps> {
+    throw new Error('Method not implemented.')
+  }
 
   async findProductBySku(sku: string): Promise<ProductModelProps> {
     const product = await this.prismaService.product.findFirst({
@@ -33,21 +45,5 @@ export class ProductPrismaRepository implements ProductRepositoryContract {
 
   async findAll(): Promise<ProductModelProps[]> {
     return await this.prismaService.product.findMany()
-  }
-
-  createMany(entity: ProductModelProps[]): Promise<ProductModelProps[]> {
-    throw new Error('Method not implemented.')
-  }
-
-  update(entity: ProductModelProps): Promise<void> {
-    throw new Error('Method not implemented.')
-  }
-
-  delete(entityId: string): Promise<void> {
-    throw new Error('Method not implemented.')
-  }
-
-  findById(entityId: string): Promise<ProductModelProps> {
-    throw new Error('Method not implemented.')
   }
 }
