@@ -16,8 +16,12 @@ export class ProductPrismaRepository implements ProductRepositoryContract {
   delete(entityId: string): Promise<void> {
     throw new Error('Method not implemented.')
   }
-  findById(entityId: string): Promise<ProductModelProps> {
-    throw new Error('Method not implemented.')
+
+  async findById(entityId: string): Promise<ProductModelProps> {
+    const product = await this.prismaService.product.findFirst({
+      where: { id: entityId }
+    })
+    return product || null
   }
 
   async findProductBySku(sku: string): Promise<ProductModelProps> {

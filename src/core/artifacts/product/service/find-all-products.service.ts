@@ -28,20 +28,18 @@ export class FindAllProductsService
   ) {}
 
   async execute(): Promise<FindAllProductsServiceOutput[]> {
-    const [products, productTypes, simpleProducts, virtualProducts] =
-      await Promise.all([
-        this.productRepository.findAll(),
-        this.productTypeRepository.findAll(),
-        this.simpleProductRepository.findAll(),
-        this.virtualProductRepository.findAll()
-      ])
+    const [products, productTypes] = await Promise.all([
+      this.productRepository.findAll(),
+      this.productTypeRepository.findAll()
+    ])
+
+    const productTypeMap = new Map<string, ProductTypeModelProps>()
+    productTypes.forEach(type => productTypeMap.set(type.id, type))
 
     const resolvedProducts: FindAllProductsServiceOutput[] = await Promise.all(
       products.map(async product => {
         const { productTypeId, ...productWithoutTypeId } = product
-        const correspondingType = productTypes.find(
-          type => type.id === productTypeId
-        )
+        const correspondingType = productTypeMap.get(productTypeId)
         if (!correspondingType) {
           throw new Error(
             `Corresponding product type not found for Product with productTypeId: ${product.productTypeId}`
@@ -53,12 +51,10 @@ export class FindAllProductsService
             product.id
           )
 
-        const simpleProduct = simpleProducts.find(
-          p => p.productId === product.id
-        )
-        const virtualProduct = virtualProducts.find(
-          p => p.productId === product.id
-        )
+        const [simpleProduct, virtualProduct] = await Promise.all([
+          this.simpleProductRepository.findByProductId(product.id),
+          this.virtualProductRepository.findByProductId(product.id)
+        ])
 
         return {
           ...productWithoutTypeId,
@@ -75,8 +71,6 @@ export class FindAllProductsService
         }
       })
     )
-
-    console.log(resolvedProducts)
 
     return resolvedProducts
   }

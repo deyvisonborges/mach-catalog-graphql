@@ -4,4 +4,13 @@ import { SimpleProductRepositoryType } from './simple-product.repository.type'
 
 export class SimpleProductInMemoryRepository
   extends InMemoryBaseRepository<SimpleProductRepositoryType>
-  implements SimpleProductRepositoryContract {}
+  implements SimpleProductRepositoryContract
+{
+  async findByProductId(
+    productId: string
+  ): Promise<SimpleProductRepositoryType> {
+    return await this.items.find(product =>
+      product.productId === productId ? product : null
+    )
+  }
+}

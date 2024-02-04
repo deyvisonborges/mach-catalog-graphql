@@ -8,6 +8,16 @@ export class VirtualProductPrismaRepository
   implements VirtualProductRepositoryContract
 {
   constructor(private readonly prismaService: PrismaService) {}
+
+  async findByProductId(
+    productId: string
+  ): Promise<VirtualProductRepositoryType> {
+    const result = await this.prismaService.virtualProduct.findFirst({
+      where: { id: productId }
+    })
+    return result || null
+  }
+
   async createOne(
     entity: VirtualProductRepositoryType
   ): Promise<VirtualProductRepositoryType> {
@@ -15,14 +25,17 @@ export class VirtualProductPrismaRepository
       data: entity
     })
   }
+
   createMany(
     entity: VirtualProductRepositoryType[]
   ): Promise<VirtualProductRepositoryType[]> {
     throw new Error('Method not implemented.')
   }
+
   update(entity: VirtualProductRepositoryType): Promise<void> {
     throw new Error('Method not implemented.')
   }
+
   delete(entityId: string): Promise<void> {
     throw new Error('Method not implemented.')
   }

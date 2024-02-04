@@ -9,6 +9,15 @@ export class SimpleProductPrismaRepository
 {
   constructor(private readonly prismaService: PrismaService) {}
 
+  async findByProductId(
+    productId: string
+  ): Promise<SimpleProductRepositoryType> {
+    const result = await this.prismaService.simpleProduct.findFirst({
+      where: { productId: productId }
+    })
+    return result || null
+  }
+
   async createOne(
     entity: SimpleProductRepositoryType
   ): Promise<SimpleProductRepositoryType> {

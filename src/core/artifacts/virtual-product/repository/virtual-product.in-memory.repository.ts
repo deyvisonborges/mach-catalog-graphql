@@ -4,4 +4,13 @@ import { VirtualProductRepositoryType } from './virtual-product.repository.type'
 
 export class VirtualProductInMemoryRepository
   extends InMemoryBaseRepository<VirtualProductRepositoryType>
-  implements VirtualProductRepositoryContract {}
+  implements VirtualProductRepositoryContract
+{
+  async findByProductId(
+    productId: string
+  ): Promise<VirtualProductRepositoryType> {
+    return await this.items.find(product =>
+      product.productId === productId ? product : null
+    )
+  }
+}

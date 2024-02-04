@@ -29,13 +29,13 @@ const services = [
   {
     provide: CreateAVirtualProductService,
     useFactory: (
-      virtualProductRepository: VirtualProductPrismaRepository,
-      productRepository: ProductPrismaRepository,
+      repository: VirtualProductPrismaRepository,
+      productsRepository: ProductPrismaRepository,
       productTypeRepository: ProductTypePrismaRepository
     ) => {
       return new CreateAVirtualProductService(
-        virtualProductRepository,
-        productRepository,
+        repository,
+        productsRepository,
         productTypeRepository
       )
     },
