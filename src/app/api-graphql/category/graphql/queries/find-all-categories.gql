@@ -1,0 +1,6 @@
+query {
+  findAllCategories {
+    name
+    description
+  }
+}

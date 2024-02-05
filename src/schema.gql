@@ -41,6 +41,8 @@ type Query {
   hello: String!
   findAll: [Products!]!
   findAllSimpleProduct: [SimpleProductObject!]!
+  findOne(input: String!): CategoryOutput!
+  findAllCategories: [CategoryOutput!]!
 }
 
 union Products = SimpleProductOutput | VirtualProductOutput
@@ -78,6 +80,7 @@ type Mutation {
   createVirtualProduct(input: VirtualProductInput!): VirtualProductObject!
   createProductType(input: ProductTypeInput!): ProductTypeObject!
   createCategory(input: CategoryInput!): CategoryOutput!
+  removeCategory(id: String!): CategoryOutput!
 }
 
 input SimpleProductInput {

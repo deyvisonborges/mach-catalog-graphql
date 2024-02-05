@@ -1,0 +1,6 @@
+query {
+  findOne(input: "123") {
+    name
+    description
+  }
+}
