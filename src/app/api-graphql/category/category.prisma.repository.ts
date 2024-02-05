@@ -17,7 +17,6 @@ export class CategoryPrismaRepository implements CategoryRepositoryContract {
   }
 
   async createOne(entity: CategoryModelProps): Promise<CategoryModelProps> {
-    delete entity.id
     const category = await this.prismaService.category.create({
       data: {
         name: entity.name,
@@ -33,8 +32,11 @@ export class CategoryPrismaRepository implements CategoryRepositoryContract {
   update(entity: CategoryModelProps): Promise<void> {
     throw new Error('Method not implemented.')
   }
-  delete(entityId: string): Promise<void> {
-    throw new Error('Method not implemented.')
+
+  async delete(entityId: string): Promise<void> {
+    await this.prismaService.category.delete({
+      where: { id: Number(entityId) }
+    })
   }
 
   async findById(entityId: string): Promise<CategoryModelProps> {

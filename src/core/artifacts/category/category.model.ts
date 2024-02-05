@@ -15,6 +15,7 @@ export class CategoryModel extends BaseModel implements CategoryModelProps {
   }
 
   static create(props: CategoryModelProps): CategoryModel {
+    delete props.id
     const category = new CategoryModel(props)
     return category
   }

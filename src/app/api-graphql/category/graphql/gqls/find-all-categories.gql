@@ -1,5 +1,9 @@
 query {
   findAllCategories {
+    id
+    active
+    createdAt
+    updatedAt
     name
     description
   }
