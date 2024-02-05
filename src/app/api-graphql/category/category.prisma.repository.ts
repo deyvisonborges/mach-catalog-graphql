@@ -17,8 +17,12 @@ export class CategoryPrismaRepository implements CategoryRepositoryContract {
   }
 
   async createOne(entity: CategoryModelProps): Promise<CategoryModelProps> {
+    delete entity.id
     const category = await this.prismaService.category.create({
-      data: { ...entity, id: Number(entity.id) }
+      data: {
+        name: entity.name,
+        description: entity.description
+      }
     })
     return { ...category, id: String(category.id) }
   }
@@ -37,7 +41,8 @@ export class CategoryPrismaRepository implements CategoryRepositoryContract {
     const category = await this.prismaService.category.findFirst({
       where: { id: Number(entityId) }
     })
-    return { ...category, id: String(category.id) }
+
+    return category ? { ...category, id: String(category.id) } : null
   }
 
   async findAll(): Promise<CategoryModelProps[]> {

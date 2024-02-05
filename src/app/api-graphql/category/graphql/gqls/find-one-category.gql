@@ -1,6 +1,10 @@
 query {
-  findOne(input: "123") {
+  findOne(input: "1") {
     name
-    description
+    description,
+    id
+    active
+    createdAt
+	  updatedAt
   }
 }

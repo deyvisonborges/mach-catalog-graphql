@@ -7,6 +7,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// TODO: remover a obrigatoriedade de passar o enum
 enum ProductTypeEnum {
   SIMPLE_PRODUCT
   VIRTUAL_PRODUCT
@@ -60,18 +61,26 @@ model VirtualProduct {
 }
 
 model Category {
-  id              Int               @id @default(autoincrement())
-  name            String
-  description     String
+  id        Int       @id @default(autoincrement())
+  createdAt DateTime? @default(now()) @map(name: "created_at")
+  updatedAt DateTime? @updatedAt @map(name: "updated_at")
+  active    Boolean?  @default(false)
+
+  name        String
+  description String
+
   ProductCategory ProductCategory[]
 
-  @@map("category")
+  @@map("categories")
 }
 
+// Many-to-many relation between Product and Category
 model ProductCategory {
   id         String   @id @default(uuid())
   productId  String
   categoryId Int
   product    Product  @relation(fields: [productId], references: [id])
   category   Category @relation(fields: [categoryId], references: [id])
+
+  @@map("products_categories")
 }
