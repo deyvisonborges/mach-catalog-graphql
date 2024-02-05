@@ -13,8 +13,7 @@ export class FindOneCategoryService
   constructor(private categoryRepository: CategoryRepositoryContract) {}
 
   async execute(input: Input): Promise<Output> {
-    const uuid = new UUID(input.id)
-    const category = await this.categoryRepository.findById(uuid.toString())
+    const category = await this.categoryRepository.findById(input.id)
 
     if (!category)
       throw new NotFoundException(`Not found category with uuid: ` + input.id)
