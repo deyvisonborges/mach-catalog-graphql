@@ -7,6 +7,12 @@ export class ProductCategoryInMemoryRepository
   extends InMemoryBaseRepository<ProductCategoryRepositoryType>
   implements ProductCategoryRepositoryContract
 {
+  assignCategoriesToProduct(
+    productId: string,
+    categoriesIds: string[]
+  ): Promise<void> {
+    throw new Error('Method not implemented.')
+  }
   async findCategoriesByIds(
     categoriesIds: string[]
   ): Promise<ProductCategoryRepositoryType[]> {

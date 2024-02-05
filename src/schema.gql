@@ -76,11 +76,17 @@ type VirtualProductOutput {
 }
 
 type Mutation {
+  assignCategoriesToProduct(input: AssignCategoriesToProductInputApi!): String!
   createSimpleProduct(input: SimpleProductInput!): SimpleProductObject!
   createVirtualProduct(input: VirtualProductInput!): VirtualProductObject!
   createProductType(input: ProductTypeInput!): ProductTypeObject!
   createCategory(input: CategoryInput!): CategoryOutput!
   removeCategory(id: String!): CategoryOutput!
+}
+
+input AssignCategoriesToProductInputApi {
+  productId: String!
+  categoriesIds: [String!]!
 }
 
 input SimpleProductInput {

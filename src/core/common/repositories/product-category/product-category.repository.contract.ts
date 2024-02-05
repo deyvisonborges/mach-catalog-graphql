@@ -3,6 +3,10 @@ import { ProductCategoryRepositoryType } from './product-category.repository.typ
 import { CategoryModelProps } from 'src/core/artifacts/category/category.model'
 
 export type ProductCategoryRepositoryContract = {
+  assignCategoriesToProduct(
+    productId: string,
+    categoriesIds: string[]
+  ): Promise<void>
   findCategoriesByIds(
     categoriesIds: string[]
   ): Promise<ProductCategoryRepositoryType[] | []>

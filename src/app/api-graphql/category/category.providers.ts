@@ -1,40 +1,43 @@
 import { DeleteCategoryService } from 'src/core/artifacts/category/service/delete-category.service'
-import { CategoryInMemoryRepository } from '../../../core/artifacts/category/repository/category.in-memory.repository'
 import { CreateCategoryService } from '../../../core/artifacts/category/service/create-category.service'
-import { RetrieveASingleCategory } from 'src/core/artifacts/category/service/find-category-by-id.service'
 import { FindAllCategoriesService } from 'src/core/artifacts/category/service/find-all-categories.service'
+import { FindOneCategoryService } from 'src/core/artifacts/category/service/find-one-category.service'
+import { CategoryPrismaRepository } from './category.prisma.repository'
+import { PrismaService } from 'src/app/database/prisma/prisma.service'
 
 const repositories = [
   {
-    provide: CategoryInMemoryRepository,
-    useFactory: () => new CategoryInMemoryRepository()
+    provide: CategoryPrismaRepository,
+    useFactory: (prismaService: PrismaService) =>
+      new CategoryPrismaRepository(prismaService),
+    inject: [PrismaService]
   }
 ]
 
 const services = [
   {
     provide: CreateCategoryService,
-    useFactory: (categoryRepo: CategoryInMemoryRepository) =>
+    useFactory: (categoryRepo: CategoryPrismaRepository) =>
       new CreateCategoryService(categoryRepo),
-    inject: [CategoryInMemoryRepository]
+    inject: [CategoryPrismaRepository]
   },
   {
     provide: DeleteCategoryService,
-    useFactory: (categoryRepo: CategoryInMemoryRepository) =>
+    useFactory: (categoryRepo: CategoryPrismaRepository) =>
       new DeleteCategoryService(categoryRepo),
-    inject: [CategoryInMemoryRepository]
+    inject: [CategoryPrismaRepository]
   },
   {
-    provide: RetrieveASingleCategory,
-    useFactory: (categoryRepo: CategoryInMemoryRepository) =>
-      new RetrieveASingleCategory(categoryRepo),
-    inject: [CategoryInMemoryRepository]
+    provide: FindOneCategoryService,
+    useFactory: (categoryRepo: CategoryPrismaRepository) =>
+      new FindOneCategoryService(categoryRepo),
+    inject: [CategoryPrismaRepository]
   },
   {
     provide: FindAllCategoriesService,
-    useFactory: (categoryRepo: CategoryInMemoryRepository) =>
+    useFactory: (categoryRepo: CategoryPrismaRepository) =>
       new FindAllCategoriesService(categoryRepo),
-    inject: [CategoryInMemoryRepository]
+    inject: [CategoryPrismaRepository]
   }
 ]
 

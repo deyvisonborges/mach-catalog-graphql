@@ -61,4 +61,18 @@ export class ProductCategoryPrismaRepository
   findAll(): Promise<ProductCategoryRepositoryType[]> {
     throw new Error('Method not implemented.')
   }
+
+  async assignCategoriesToProduct(
+    productId: string,
+    categoriesIds: string[]
+  ): Promise<void> {
+    const values = categoriesIds.map(category => ({
+      categoryId: Number(category),
+      productId
+    }))
+
+    await this.prismaService.productCategory.createMany({
+      data: values
+    })
+  }
 }

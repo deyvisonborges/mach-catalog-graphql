@@ -4,4 +4,11 @@ import { CategoryRepositoryContract } from './category.repository.contract'
 
 export class CategoryInMemoryRepository
   extends InMemoryBaseRepository<CategoryModelProps>
-  implements CategoryRepositoryContract {}
+  implements CategoryRepositoryContract
+{
+  async getValidCategoriesByIds(
+    ids: string[]
+  ): Promise<[] | CategoryModelProps[]> {
+    return this.items.filter(category => ids.includes(category.id))
+  }
+}
