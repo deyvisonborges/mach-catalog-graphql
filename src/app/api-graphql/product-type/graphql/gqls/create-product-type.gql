@@ -1,0 +1,11 @@
+mutation {
+  createProductType(input: {
+    name: "SIMPLE_PRODUCT"
+  }) {
+    id
+    name
+    active
+    createdAt
+    updatedAt
+  }
+}

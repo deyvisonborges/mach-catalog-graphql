@@ -2,9 +2,18 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type ProductTypeObject {
+type ProductTypeOutput {
   name: String!
+  id: String!
+  active: Boolean!
+  createdAt: DateTime!
+  updatedAt: DateTime!
 }
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
 
 type CategoryOutput {
   name: String!
@@ -14,11 +23,6 @@ type CategoryOutput {
   createdAt: DateTime
   updatedAt: DateTime
 }
-
-"""
-A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
-"""
-scalar DateTime
 
 type SimpleProductObject {
   size: String!
@@ -57,7 +61,7 @@ type Query {
 union Products = SimpleProductOutput | VirtualProductOutput
 
 type SimpleProductOutput {
-  productType: ProductTypeObject!
+  productType: ProductTypeOutput!
   size: String!
   weight: Float!
   material: String!
@@ -73,7 +77,7 @@ type SimpleProductOutput {
 
 type VirtualProductOutput {
   downloadLink: String!
-  productType: ProductTypeObject!
+  productType: ProductTypeOutput!
   name: String!
   description: String!
   sku: String!
@@ -88,7 +92,7 @@ type Mutation {
   assignCategoriesToProduct(input: AssignCategoriesToProductInputApi!): String!
   createSimpleProduct(input: SimpleProductInput!): SimpleProductObject!
   createVirtualProduct(input: VirtualProductInput!): VirtualProductObject!
-  createProductType(input: ProductTypeInput!): ProductTypeObject!
+  createProductType(input: CreateProductTypeInputApi!): ProductTypeOutput!
   createCategory(input: CreateCategoryInputApi!): CategoryOutput!
   removeCategory(id: String!): CategoryOutput!
 }
@@ -124,7 +128,7 @@ input VirtualProductInput {
   productTypeId: String!
 }
 
-input ProductTypeInput {
+input CreateProductTypeInputApi {
   name: String!
 }
 

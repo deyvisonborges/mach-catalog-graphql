@@ -1,15 +1,15 @@
 import { Args, Mutation, Resolver } from '@nestjs/graphql'
-import { ProductTypeObject } from './product-type.object'
-import { ProductTypeInput } from './product-type.input'
+import { ProductTypeOutput } from './product-type.output'
 import { Inject } from '@nestjs/common'
 import { CreateProductTypeService } from 'src/core/artifacts/product-type/service/create-product-type.service'
+import { CreateProductTypeInputApi } from './inputs/create-product-type.input'
 
-@Resolver(() => ProductTypeObject)
+@Resolver(() => ProductTypeOutput)
 export class ProductTypeResolver {
   @Inject() private readonly createProductTypeService: CreateProductTypeService
 
-  @Mutation(() => ProductTypeObject)
-  async createProductType(@Args('input') input: ProductTypeInput) {
+  @Mutation(() => ProductTypeOutput)
+  async createProductType(@Args('input') input: CreateProductTypeInputApi) {
     return await this.createProductTypeService.execute(input)
   }
 }

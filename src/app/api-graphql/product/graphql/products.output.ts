@@ -1,7 +1,7 @@
 import { Field, Float, ObjectType } from '@nestjs/graphql'
 import { ProductTypeModelProps } from 'src/core/artifacts/product-type/product-type.model'
 import { FindAllProductsServiceOutput } from 'src/core/artifacts/product/service/find-all-products.service'
-import { ProductTypeObject } from '../../product-type/graphql/product-type.object'
+import { ProductTypeOutput } from '../../product-type/graphql/product-type.output'
 import { CategoryOutput } from '../../category/graphql/category.output'
 import { CategoryModelProps } from 'src/core/artifacts/category/category.model'
 
@@ -40,7 +40,7 @@ export abstract class ProductsOutput implements FindAllProductsServiceOutput {
   @Field(() => String, { nullable: true })
   downloadLink?: string
 
-  @Field(() => ProductTypeObject)
+  @Field(() => ProductTypeOutput)
   productType: ProductTypeModelProps
 
   @Field(() => [CategoryOutput])

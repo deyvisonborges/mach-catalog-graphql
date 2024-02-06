@@ -1,18 +1,22 @@
 import { BaseServiceContract } from 'src/core/common/base/service.base'
-import { ProductTypeModelProps } from '../product-type.model'
+import { ProductTypeModel, ProductTypeModelProps } from '../product-type.model'
 import { BaseModelProps } from 'src/core/common/base/model.base'
 import { ProductTypeRepositoryContract } from '../repository/product-type.repository.contract'
 import { HttpException, HttpStatus } from '@nestjs/common'
 
-type Input = Omit<ProductTypeModelProps, keyof BaseModelProps>
+export type CreateProductTypeServiceInput = Omit<
+  ProductTypeModelProps,
+  keyof BaseModelProps
+>
+
 type Output = ProductTypeModelProps
 
 export class CreateProductTypeService
-  implements BaseServiceContract<Input, Output>
+  implements BaseServiceContract<CreateProductTypeServiceInput, Output>
 {
   constructor(private readonly repository: ProductTypeRepositoryContract) {}
 
-  async execute(input: Input): Promise<Output> {
+  async execute(input: CreateProductTypeServiceInput): Promise<Output> {
     const exists = await this.repository.findByName(input.name)
 
     if (exists)
@@ -21,6 +25,7 @@ export class CreateProductTypeService
         HttpStatus.BAD_REQUEST
       )
 
-    return await this.repository.createOne(input)
+    const productType = ProductTypeModel.create(input)
+    return await this.repository.createOne(productType)
   }
 }

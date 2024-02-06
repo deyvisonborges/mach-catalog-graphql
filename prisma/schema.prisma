@@ -7,16 +7,13 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// TODO: remover a obrigatoriedade de passar o enum
-enum ProductTypeEnum {
-  SIMPLE_PRODUCT
-  VIRTUAL_PRODUCT
-}
-
 model ProductType {
-  id      String          @id @default(uuid())
-  name    ProductTypeEnum
-  Product Product[]
+  id        String    @id @default(uuid())
+  createdAt DateTime? @default(now()) @map(name: "created_at")
+  updatedAt DateTime? @updatedAt @map(name: "updated_at")
+  active    Boolean?  @default(false)
+  name      String
+  Product   Product[]
 
   @@map("products_types")
 }
