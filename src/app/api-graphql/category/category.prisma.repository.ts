@@ -26,13 +26,6 @@ export class CategoryPrismaRepository implements CategoryRepositoryContract {
     return { ...category, id: String(category.id) }
   }
 
-  createMany(entity: CategoryModelProps[]): Promise<CategoryModelProps[]> {
-    throw new Error('Method not implemented.')
-  }
-  update(entity: CategoryModelProps): Promise<void> {
-    throw new Error('Method not implemented.')
-  }
-
   async delete(entityId: string): Promise<void> {
     await this.prismaService.category.delete({
       where: { id: Number(entityId) }
