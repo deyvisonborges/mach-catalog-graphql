@@ -5,4 +5,5 @@ export type ProductRepositoryContract = {
   findProductBySku(
     sku: ProductRepositoryTypeAdapter['sku']
   ): Promise<ProductRepositoryTypeAdapter | null>
+  findByIds(productIds: string[]): Promise<ProductRepositoryTypeAdapter[]>
 } & BaseRepositoryContract<ProductRepositoryTypeAdapter>

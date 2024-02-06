@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { PrismaService } from 'src/app/database/prisma/prisma.service'
 import { SimpleProductRepositoryContract } from 'src/core/artifacts/simple-product/repository/simple-product.repository.contract'
-import { SimpleProductRepositoryType } from 'src/core/artifacts/simple-product/repository/simple-product.repository.type'
+import { SimpleProductRepositoryTypeAdapter } from 'src/core/artifacts/simple-product/repository/simple-product.repository.type'
 
 @Injectable()
 export class SimpleProductPrismaRepository
@@ -11,7 +11,7 @@ export class SimpleProductPrismaRepository
 
   async findByProductId(
     productId: string
-  ): Promise<SimpleProductRepositoryType> {
+  ): Promise<SimpleProductRepositoryTypeAdapter> {
     const result = await this.prismaService.simpleProduct.findFirst({
       where: { productId: productId }
     })
@@ -19,27 +19,28 @@ export class SimpleProductPrismaRepository
   }
 
   async createOne(
-    entity: SimpleProductRepositoryType
-  ): Promise<SimpleProductRepositoryType> {
+    entity: SimpleProductRepositoryTypeAdapter
+  ): Promise<SimpleProductRepositoryTypeAdapter> {
     return await this.prismaService.simpleProduct.create({
       data: entity
     })
   }
-  createMany(
-    entity: SimpleProductRepositoryType[]
-  ): Promise<SimpleProductRepositoryType[]> {
-    throw new Error('Method not implemented.')
-  }
-  update(entity: SimpleProductRepositoryType): Promise<void> {
-    throw new Error('Method not implemented.')
-  }
-  delete(entityId: string): Promise<void> {
-    throw new Error('Method not implemented.')
-  }
-  findById(entityId: string): Promise<SimpleProductRepositoryType> {
-    throw new Error('Method not implemented.')
-  }
-  async findAll(): Promise<SimpleProductRepositoryType[]> {
+
+  async findAll(): Promise<SimpleProductRepositoryTypeAdapter[]> {
     return await this.prismaService.simpleProduct.findMany()
   }
+
+  // async findByIds(
+  //   productIds: string[]
+  // ): Promise<SimpleProductRepositoryTypeAdapter[]> {
+  //   const products = await this.prismaService.simpleProduct.findMany({
+  //     where: {
+  //       id: {
+  //         in: productIds
+  //       }
+  //     }
+  //   })
+
+  //   return products
+  // }
 }

@@ -9,3 +9,13 @@ export type ProductModelPropsAdapter = Omit<
   productType: ProductTypeModelProps
   categories: CategoryModelProps[]
 }
+
+// TODO: Aplicar o BaseModelPropsAdapter
+// export type ProductModelPropsAdapter = Omit<
+//   Omit<ProductModelProps, 'productTypeId' | 'categoriesIds'> & {
+//     productType: ProductTypeModelProps
+//     categories: CategoryModelProps[]
+//   },
+//   keyof BaseModelProps
+// > &
+//   BaseModelPropsAdapter

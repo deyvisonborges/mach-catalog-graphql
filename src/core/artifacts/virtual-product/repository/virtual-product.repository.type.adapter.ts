@@ -1,7 +1,7 @@
 import { ProductModelProps } from '../../product/product.model'
 import { VirtualProductModelProps } from '../virtual-product.model'
 
-export type VirtualProductRepositoryType = Omit<
+export type VirtualProductRepositoryTypeAdapter = Omit<
   VirtualProductModelProps,
-  keyof ProductModelProps
+  keyof ProductModelProps | 'categoriesIds'
 > & { productId: string }

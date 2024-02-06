@@ -1,19 +1,22 @@
-import { ObjectType, Field } from '@nestjs/graphql'
-import { CategoryModelProps } from 'src/core/artifacts/category/category.model'
+import { Field, ObjectType } from '@nestjs/graphql'
 import { ProductTypeModelProps } from 'src/core/artifacts/product-type/product-type.model'
-import { ProductModelPropsAdapter } from 'src/core/artifacts/product/product.model.adapter'
 import { ProductTypeOutput } from '../../product-type/graphql/product-type.output'
 import { CategoryOutput } from '../../category/graphql/category.output'
+import { CategoryModelProps } from 'src/core/artifacts/category/category.model'
+import { VirtualProductModelPropsAdapter } from 'src/core/artifacts/virtual-product/virtual-product.model.adapter'
 
 @ObjectType()
-export class ProductObject implements ProductModelPropsAdapter {
-  @Field()
+export class VirtualProductOutput implements VirtualProductModelPropsAdapter {
+  @Field(() => String)
+  downloadLink: string
+
+  @Field(() => String)
   name: string
 
-  @Field()
+  @Field(() => String)
   description: string
 
-  @Field()
+  @Field(() => String)
   sku: string
 
   @Field()
@@ -25,24 +28,12 @@ export class ProductObject implements ProductModelPropsAdapter {
   @Field()
   promotionalPrice: number
 
-  @Field()
+  @Field(() => String)
   thumbnail: string
 
   @Field(() => ProductTypeOutput)
   productType: ProductTypeModelProps
 
-  @Field(() => [CategoryOutput])
+  @Field(() => [CategoryOutput], { nullable: true })
   categories: CategoryModelProps[]
-
-  @Field(() => String)
-  id?: string
-
-  @Field(() => Boolean)
-  active?: boolean
-
-  @Field(() => Date)
-  createdAt?: Date
-
-  @Field(() => Date)
-  updatedAt?: Date
 }

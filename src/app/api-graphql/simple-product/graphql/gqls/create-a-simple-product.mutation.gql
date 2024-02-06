@@ -1,0 +1,31 @@
+mutation {
+  createSimpleProduct(
+    input: {
+      size: "M"
+      weight: 12
+      material: "Tactel"
+      name: "Calça Masculina"
+      description: "Modelo personalizado"
+      sku: "CALM12C00012"
+      salePrice: 39.90
+      costPrice: 29.90
+      promotionalPrice: 0.00
+      thumbnail: "minha-url"
+      productTypeId: "a99ae313-5f47-456f-9cdd-588da6454422"
+    }
+  ) {
+    size
+    weight
+    material
+    productType {
+      name
+    }
+    name
+    description
+    sku
+    salePrice
+    costPrice
+    promotionalPrice
+    thumbnail
+  }
+}

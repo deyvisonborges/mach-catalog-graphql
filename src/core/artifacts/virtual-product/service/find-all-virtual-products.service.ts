@@ -1,37 +1,59 @@
 import { BaseServiceContract } from 'src/core/common/base/service.base'
-import { VirtualProductModelProps } from '../virtual-product.model'
 import { VirtualProductRepositoryContract } from '../repository/virtual-product.repository.contract'
 import { ProductRepositoryContract } from '../../product/repository/product.repository.contract'
+import { VirtualProductModelPropsAdapter } from '../virtual-product.model.adapter'
+import { ProductCategoryRepositoryContract } from 'src/core/common/repositories/product-category/product-category.repository.contract'
+import { ProductTypeRepositoryContract } from '../../product-type/repository/product-type.repository.contract'
+import { ProductTypeModelProps } from '../../product-type/product-type.model'
 
-type Output = VirtualProductModelProps[]
+type Output = VirtualProductModelPropsAdapter[]
 
 export class FindAllVirtualProductsService
   implements BaseServiceContract<void, Output>
 {
   constructor(
     private readonly productRepository: ProductRepositoryContract,
+    private readonly productCategoryRepository: ProductCategoryRepositoryContract,
+    private readonly productTypeRepository: ProductTypeRepositoryContract,
     private readonly repository: VirtualProductRepositoryContract
   ) {}
 
   async execute(): Promise<Output> {
     const virtualProducts = await this.repository.findAll()
-    const products = await this.productRepository.findAll()
 
-    const output: Output = virtualProducts.map(virtual => {
-      const correspondingProduct = products.find(
-        product => product.id === virtual.productId
+    const productIds = virtualProducts.map(product => product.productId)
+    const products = await this.productRepository.findByIds(productIds)
+
+    const virtualProductsData: Output = []
+
+    for (const virtualProduct of virtualProducts) {
+      const product = products.find(
+        product => product.id === virtualProduct.productId
       )
-      if (!correspondingProduct) {
+
+      if (!product) {
         throw new Error(
-          `Corresponding product not found for SimpleProduct with productId: ${virtual.productId}`
+          `Product not found for SimpleProduct with productId: ${virtualProduct.productId}`
         )
       }
-      return {
-        ...correspondingProduct,
-        ...virtual
-      }
-    })
 
-    return output
+      const categories =
+        await this.productCategoryRepository.findCategoriesByProductId(
+          product.id
+        )
+      const productType: ProductTypeModelProps =
+        await this.productTypeRepository.findById(product.productTypeId)
+
+      const virtualProductData: VirtualProductModelPropsAdapter = {
+        ...product,
+        downloadLink: virtualProduct.downloadLink,
+        productType,
+        categories
+      }
+
+      virtualProductsData.push(virtualProductData)
+
+      return virtualProductsData
+    }
   }
 }

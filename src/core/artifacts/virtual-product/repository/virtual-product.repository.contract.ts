@@ -1,8 +1,8 @@
 import { BaseRepositoryContract } from 'src/core/common/base/repository.contract.base'
-import { VirtualProductRepositoryType } from './virtual-product.repository.type.adapter'
+import { VirtualProductRepositoryTypeAdapter } from './virtual-product.repository.type.adapter'
 
 export type VirtualProductRepositoryContract = {
   findByProductId(
     productId: string
-  ): Promise<VirtualProductRepositoryType | null>
-} & BaseRepositoryContract<VirtualProductRepositoryType>
+  ): Promise<VirtualProductRepositoryTypeAdapter | null>
+} & BaseRepositoryContract<VirtualProductRepositoryTypeAdapter>

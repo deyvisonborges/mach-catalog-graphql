@@ -7,8 +7,16 @@ export class ProductInMemoryRepository
   implements ProductRepositoryContract
 {
   async findProductBySku(sku: string): Promise<ProductRepositoryTypeAdapter> {
-    return await this.items.find(product =>
-      product.sku.toLowerCase() === sku.toLowerCase() ? product : null
+    return (
+      this.items.find(
+        product => product.sku.toLowerCase() === sku.toLowerCase()
+      ) || null
     )
+  }
+
+  async findByIds(
+    productIds: string[]
+  ): Promise<ProductRepositoryTypeAdapter[]> {
+    return this.items.filter(product => productIds.includes(product.id))
   }
 }

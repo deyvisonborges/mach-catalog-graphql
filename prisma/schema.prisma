@@ -12,6 +12,7 @@ model ProductType {
   createdAt DateTime? @default(now()) @map(name: "created_at")
   updatedAt DateTime? @updatedAt @map(name: "updated_at")
   active    Boolean?  @default(false)
+  
   name      String
   Product   Product[]
 
@@ -19,7 +20,11 @@ model ProductType {
 }
 
 model Product {
-  id               String            @id @default(uuid())
+  id        String    @id @default(uuid())
+  createdAt DateTime? @default(now()) @map(name: "created_at")
+  updatedAt DateTime? @updatedAt @map(name: "updated_at")
+  active    Boolean?  @default(false)
+
   name             String
   description      String
   sku              String
@@ -37,7 +42,11 @@ model Product {
 }
 
 model SimpleProduct {
-  id        String  @id @default(uuid())
+  id        String    @id @default(uuid())
+  createdAt DateTime? @default(now()) @map(name: "created_at")
+  updatedAt DateTime? @updatedAt @map(name: "updated_at")
+  active    Boolean?  @default(false)
+
   size      String
   weight    Int
   material  String
@@ -48,7 +57,11 @@ model SimpleProduct {
 }
 
 model VirtualProduct {
-  id           String @id @default(uuid())
+  id        String    @id @default(uuid())
+  createdAt DateTime? @default(now()) @map(name: "created_at")
+  updatedAt DateTime? @updatedAt @map(name: "updated_at")
+  active    Boolean?  @default(false)
+
   downloadLink String @map("download_link")
 
   productId String  @map("product_id")

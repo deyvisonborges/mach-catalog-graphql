@@ -1,0 +1,6 @@
+mutation {
+  assignCategoriesToProduct(input: {
+    productId: "561653bd-ea03-4123-a84f-521a13aba6b4",
+    categoriesIds: ["1", "2"]
+  })
+}

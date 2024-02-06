@@ -5,16 +5,4 @@ import { ProductTypeModelProps } from 'src/core/artifacts/product-type/product-t
 export class ProductTypeOutput implements ProductTypeModelProps {
   @Field(() => String)
   name: string
-
-  @Field(() => String)
-  id?: string
-
-  @Field(() => Boolean)
-  active?: boolean
-
-  @Field(() => Date)
-  createdAt?: Date
-
-  @Field(() => Date)
-  updatedAt?: Date
 }
