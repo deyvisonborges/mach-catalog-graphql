@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { PrismaService } from 'src/app/database/prisma/prisma.service'
 import { VirtualProductRepositoryContract } from 'src/core/artifacts/virtual-product/repository/virtual-product.repository.contract'
-import { VirtualProductRepositoryType } from 'src/core/artifacts/virtual-product/repository/virtual-product.repository.type'
+import { VirtualProductRepositoryType } from 'src/core/artifacts/virtual-product/repository/virtual-product.repository.type.adapter'
 
 @Injectable()
 export class VirtualProductPrismaRepository

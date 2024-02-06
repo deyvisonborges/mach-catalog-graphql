@@ -2,19 +2,12 @@ import { BaseServiceContract } from 'src/core/common/base/service.base'
 import { ProductRepositoryContract } from '../repository/product.repository.contract'
 import { SimpleProductRepositoryContract } from '../../simple-product/repository/simple-product.repository.contract'
 import { VirtualProductRepositoryContract } from '../../virtual-product/repository/virtual-product.repository.contract'
-import { ProductModelProps } from '../product.model'
 import { ProductTypeRepositoryContract } from '../../product-type/repository/product-type.repository.contract'
 import { ProductTypeModelProps } from '../../product-type/product-type.model'
-import { CategoryModelProps } from '../../category/category.model'
 import { ProductCategoryRepositoryContract } from 'src/core/common/repositories/product-category/product-category.repository.contract'
+import { ProductModelPropsAdapter } from '../product.model.adapter'
 
-export type FindAllProductsServiceOutput = Omit<
-  ProductModelProps,
-  'productTypeId'
-> & {
-  productType: ProductTypeModelProps
-  categories: CategoryModelProps[]
-}
+export type FindAllProductsServiceOutput = ProductModelPropsAdapter
 
 export class FindAllProductsService
   implements BaseServiceContract<void, FindAllProductsServiceOutput[]>
