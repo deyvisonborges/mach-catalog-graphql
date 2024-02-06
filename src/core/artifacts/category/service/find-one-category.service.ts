@@ -1,6 +1,5 @@
 import { NotFoundException } from '@nestjs/common'
 import { BaseServiceContract } from '../../../common/base/service.base'
-import { UUID } from '../../../common/valueobjects/uuid.vo'
 import { CategoryModelProps } from '../category.model'
 import { CategoryRepositoryContract } from '../repository/category.repository.contract'
 
