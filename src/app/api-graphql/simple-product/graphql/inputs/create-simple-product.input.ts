@@ -1,10 +1,18 @@
 import { Field, Float, InputType } from '@nestjs/graphql'
-import { CreateAVirtualProductServiceInput } from 'src/core/artifacts/virtual-product/service/create-a-virtual-product.service'
+import { CreateASimpleProductServiceInput } from 'src/core/artifacts/simple-product/service/create-a-simple-product.service'
 
 @InputType()
-export class VirtualProductInput implements CreateAVirtualProductServiceInput {
+export class CreateASimpleProductServiceInputApi
+  implements CreateASimpleProductServiceInput
+{
   @Field(() => String)
-  downloadLink: string
+  size: string
+
+  @Field(() => Float)
+  weight: number
+
+  @Field(() => String)
+  material: string
 
   @Field(() => String)
   name: string

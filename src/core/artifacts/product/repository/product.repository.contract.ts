@@ -1,8 +1,9 @@
 import { BaseRepositoryContract } from 'src/core/common/base/repository.contract.base'
-import { ProductModelProps } from '../product.model'
+import { ProductRepositoryTypeAdapter } from './product.repository.type.adapter'
 
 export type ProductRepositoryContract = {
   findProductBySku(
-    sku: ProductModelProps['sku']
-  ): Promise<ProductModelProps | null>
-} & BaseRepositoryContract<ProductModelProps>
+    sku: ProductRepositoryTypeAdapter['sku']
+  ): Promise<ProductRepositoryTypeAdapter | null>
+  findByIds(productIds: string[]): Promise<ProductRepositoryTypeAdapter[]>
+} & BaseRepositoryContract<ProductRepositoryTypeAdapter>

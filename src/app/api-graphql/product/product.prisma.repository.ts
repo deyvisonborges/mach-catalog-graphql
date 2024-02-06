@@ -1,37 +1,43 @@
 import { Injectable } from '@nestjs/common'
 import { PrismaService } from 'src/app/database/prisma/prisma.service'
-import { ProductModelProps } from 'src/core/artifacts/product/product.model'
-
 import { ProductRepositoryContract } from 'src/core/artifacts/product/repository/product.repository.contract'
+import { ProductRepositoryTypeAdapter } from 'src/core/artifacts/product/repository/product.repository.type.adapter'
 
 @Injectable()
 export class ProductPrismaRepository implements ProductRepositoryContract {
   constructor(private readonly prismaService: PrismaService) {}
-  createMany(entity: ProductModelProps[]): Promise<ProductModelProps[]> {
-    throw new Error('Method not implemented.')
-  }
-  update(entity: ProductModelProps): Promise<void> {
-    throw new Error('Method not implemented.')
-  }
-  delete(entityId: string): Promise<void> {
-    throw new Error('Method not implemented.')
+
+  async findByIds(
+    productIds: string[]
+  ): Promise<ProductRepositoryTypeAdapter[]> {
+    const products = await this.prismaService.product.findMany({
+      where: {
+        id: {
+          in: productIds
+        }
+      }
+    })
+
+    return products
   }
 
-  async findById(entityId: string): Promise<ProductModelProps> {
+  async findById(entityId: string): Promise<ProductRepositoryTypeAdapter> {
     const product = await this.prismaService.product.findFirst({
       where: { id: entityId }
     })
-    return product || null
+    return product
   }
 
-  async findProductBySku(sku: string): Promise<ProductModelProps> {
+  async findProductBySku(sku: string): Promise<ProductRepositoryTypeAdapter> {
     const product = await this.prismaService.product.findFirst({
       where: { sku: sku }
     })
     return product || null
   }
 
-  async createOne(entity: ProductModelProps): Promise<ProductModelProps> {
+  async createOne(
+    entity: ProductRepositoryTypeAdapter
+  ): Promise<ProductRepositoryTypeAdapter> {
     return await this.prismaService.product.create({
       data: {
         costPrice: entity.costPrice,
@@ -47,7 +53,7 @@ export class ProductPrismaRepository implements ProductRepositoryContract {
     })
   }
 
-  async findAll(): Promise<ProductModelProps[]> {
+  async findAll(): Promise<ProductRepositoryTypeAdapter[]> {
     return await this.prismaService.product.findMany()
   }
 }

@@ -4,6 +4,7 @@ import { SimpleProductPrismaRepository } from './simple-product.prisma.repositor
 import { PrismaService } from 'src/app/database/prisma/prisma.service'
 import { ProductPrismaRepository } from '../product/product.prisma.repository'
 import { ProductTypePrismaRepository } from '../product-type/product-type.prisma.repository'
+import { ProductCategoryPrismaRepository } from 'src/core/common/repositories/product-category/product-category.prisma.repository'
 
 const repositories = [
   {
@@ -22,6 +23,12 @@ const repositories = [
     provide: ProductTypePrismaRepository,
     useFactory: (prismaService: PrismaService) =>
       new ProductTypePrismaRepository(prismaService),
+    inject: [PrismaService]
+  },
+  {
+    provide: ProductCategoryPrismaRepository,
+    useFactory: (prismaService: PrismaService) =>
+      new ProductCategoryPrismaRepository(prismaService),
     inject: [PrismaService]
   }
 ]
@@ -48,10 +55,23 @@ const services = [
   {
     provide: FindAllSimpleProductsService,
     useFactory: (
+      simpleProductRepository: SimpleProductPrismaRepository,
       productRepository: ProductPrismaRepository,
-      repository: SimpleProductPrismaRepository
-    ) => new FindAllSimpleProductsService(productRepository, repository),
-    inject: [ProductPrismaRepository, SimpleProductPrismaRepository]
+      productCategoryRepository: ProductCategoryPrismaRepository,
+      productTypeRepository: ProductTypePrismaRepository
+    ) =>
+      new FindAllSimpleProductsService(
+        simpleProductRepository,
+        productRepository,
+        productCategoryRepository,
+        productTypeRepository
+      ),
+    inject: [
+      SimpleProductPrismaRepository,
+      ProductPrismaRepository,
+      ProductCategoryPrismaRepository,
+      ProductTypePrismaRepository
+    ]
   }
 ]
 

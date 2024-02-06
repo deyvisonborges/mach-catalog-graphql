@@ -1,15 +1,17 @@
 import { Args, Mutation, Resolver } from '@nestjs/graphql'
-import { VirtualProductObject } from './virtual-product.object'
-import { VirtualProductInput } from './virtual-product.input'
 import { Inject } from '@nestjs/common'
 import { CreateAVirtualProductService } from 'src/core/artifacts/virtual-product/service/create-a-virtual-product.service'
+import { VirtualProductOutput } from './virtual-product.output'
+import { CreateAVirtualProductServiceInputApi } from './inputs/create-virtual-product.input'
 
-@Resolver(() => VirtualProductObject)
+@Resolver(() => VirtualProductOutput)
 export class VirtualProductResolver {
   @Inject() private readonly createAVirtualProduct: CreateAVirtualProductService
 
-  @Mutation(() => VirtualProductObject)
-  async createVirtualProduct(@Args('input') input: VirtualProductInput) {
+  @Mutation(() => VirtualProductOutput)
+  async createVirtualProduct(
+    @Args('input') input: CreateAVirtualProductServiceInputApi
+  ) {
     return await this.createAVirtualProduct.execute(input)
   }
 }

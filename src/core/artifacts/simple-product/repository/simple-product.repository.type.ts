@@ -1,7 +1,7 @@
 import { ProductModelProps } from '../../product/product.model'
 import { SimpleProductModelProps } from '../simple-product.model'
 
-export type SimpleProductRepositoryType = Omit<
+export type SimpleProductRepositoryTypeAdapter = Omit<
   SimpleProductModelProps,
-  keyof ProductModelProps
+  keyof ProductModelProps | 'categoriesIds'
 > & { productId: string }

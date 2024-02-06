@@ -11,7 +11,9 @@ mutation {
     productTypeId: "6fd5a854-3566-48d7-a053-ad534f9945f2"
   }){
     downloadLink
-		productTypeId
+		productType {
+      name
+    }
     name
     description
     sku

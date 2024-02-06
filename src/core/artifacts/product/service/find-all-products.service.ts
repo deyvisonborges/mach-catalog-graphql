@@ -2,22 +2,15 @@ import { BaseServiceContract } from 'src/core/common/base/service.base'
 import { ProductRepositoryContract } from '../repository/product.repository.contract'
 import { SimpleProductRepositoryContract } from '../../simple-product/repository/simple-product.repository.contract'
 import { VirtualProductRepositoryContract } from '../../virtual-product/repository/virtual-product.repository.contract'
-import { ProductModelProps } from '../product.model'
 import { ProductTypeRepositoryContract } from '../../product-type/repository/product-type.repository.contract'
 import { ProductTypeModelProps } from '../../product-type/product-type.model'
-import { CategoryModelProps } from '../../category/category.model'
 import { ProductCategoryRepositoryContract } from 'src/core/common/repositories/product-category/product-category.repository.contract'
+import { ProductModelPropsAdapter } from '../product.model.adapter'
 
-export type FindAllProductsServiceOutput = Omit<
-  ProductModelProps,
-  'productTypeId'
-> & {
-  productType: ProductTypeModelProps
-  categories: CategoryModelProps[]
-}
+type Output = ProductModelPropsAdapter[]
 
 export class FindAllProductsService
-  implements BaseServiceContract<void, FindAllProductsServiceOutput[]>
+  implements BaseServiceContract<void, Output>
 {
   constructor(
     private readonly productRepository: ProductRepositoryContract,
@@ -27,7 +20,7 @@ export class FindAllProductsService
     private readonly productCategoryRepository: ProductCategoryRepositoryContract
   ) {}
 
-  async execute(): Promise<FindAllProductsServiceOutput[]> {
+  async execute(): Promise<Output> {
     const [products, productTypes] = await Promise.all([
       this.productRepository.findAll(),
       this.productTypeRepository.findAll()
@@ -36,7 +29,7 @@ export class FindAllProductsService
     const productTypeMap = new Map<string, ProductTypeModelProps>()
     productTypes.forEach(type => productTypeMap.set(type.id, type))
 
-    const resolvedProducts: FindAllProductsServiceOutput[] = await Promise.all(
+    const resolvedProducts: Output = await Promise.all(
       products.map(async product => {
         const { productTypeId, ...productWithoutTypeId } = product
         const correspondingType = productTypeMap.get(productTypeId)

@@ -1,7 +1,6 @@
 import { createUnionType } from '@nestjs/graphql'
 import { SimpleProductOutput } from '../../simple-product/graphql/simple-product.output'
-import { VirtualProductOutput } from '../../virtual-product/virtual-product.output'
-import { ProductsOutput } from './products.output'
+import { VirtualProductOutput } from '../../virtual-product/graphql/virtual-product.output'
 
 function getPropertyValue(obj1, dataToRetrieve) {
   return dataToRetrieve

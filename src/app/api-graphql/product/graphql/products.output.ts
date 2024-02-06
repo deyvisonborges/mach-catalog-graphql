@@ -1,21 +1,12 @@
 import { Field, Float, ObjectType } from '@nestjs/graphql'
 import { ProductTypeModelProps } from 'src/core/artifacts/product-type/product-type.model'
-import { FindAllProductsServiceOutput } from 'src/core/artifacts/product/service/find-all-products.service'
 import { ProductTypeOutput } from '../../product-type/graphql/product-type.output'
 import { CategoryOutput } from '../../category/graphql/category.output'
 import { CategoryModelProps } from 'src/core/artifacts/category/category.model'
+import { ProductModelPropsAdapter } from 'src/core/artifacts/product/product.model.adapter'
 
 @ObjectType()
-export abstract class ProductsOutput implements FindAllProductsServiceOutput {
-  @Field(() => String, { nullable: true })
-  size?: string
-
-  @Field(() => Float, { nullable: true })
-  weight?: number
-
-  @Field(() => String, { nullable: true })
-  material?: string
-
+export class ProductsOutput implements ProductModelPropsAdapter {
   @Field(() => String)
   name: string
 
@@ -37,12 +28,21 @@ export abstract class ProductsOutput implements FindAllProductsServiceOutput {
   @Field(() => String)
   thumbnail: string
 
-  @Field(() => String, { nullable: true })
-  downloadLink?: string
-
   @Field(() => ProductTypeOutput)
   productType: ProductTypeModelProps
 
   @Field(() => [CategoryOutput])
   categories: CategoryModelProps[]
+
+  @Field(() => String, { nullable: true })
+  size?: string
+
+  @Field(() => Float, { nullable: true })
+  weight?: number
+
+  @Field(() => String, { nullable: true })
+  material?: string
+
+  @Field(() => String, { nullable: true })
+  downloadLink?: string
 }

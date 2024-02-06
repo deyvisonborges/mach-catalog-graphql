@@ -83,9 +83,21 @@ const services = [
   },
   {
     provide: FindProductByIdService,
-    useFactory: (productRepository: ProductPrismaRepository) =>
-      new FindProductByIdService(productRepository),
-    inject: [ProductPrismaRepository]
+    useFactory: (
+      productRepository: ProductPrismaRepository,
+      productTypeRepository: ProductTypePrismaRepository,
+      productCategoryRepository: ProductCategoryPrismaRepository
+    ) =>
+      new FindProductByIdService(
+        productRepository,
+        productTypeRepository,
+        productCategoryRepository
+      ),
+    inject: [
+      ProductPrismaRepository,
+      ProductTypePrismaRepository,
+      ProductCategoryPrismaRepository
+    ]
   },
   {
     provide: GetValidCategoriesByIdsService,

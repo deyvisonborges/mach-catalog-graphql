@@ -5,17 +5,18 @@ import { HttpException, HttpStatus } from '@nestjs/common'
 import { ProductRepositoryContract } from '../../product/repository/product.repository.contract'
 import { BaseModelProps } from 'src/core/common/base/model.base'
 import { ProductTypeRepositoryContract } from '../../product-type/repository/product-type.repository.contract'
+import { VirtualProductModelPropsAdapter } from '../virtual-product.model.adapter'
 
 export type CreateAVirtualProductServiceInput = Omit<
   VirtualProductModelProps,
-  keyof BaseModelProps
+  keyof BaseModelProps | 'categoriesIds'
 >
 
 export class CreateAVirtualProductService
   implements
     BaseServiceContract<
       CreateAVirtualProductServiceInput,
-      VirtualProductModelProps
+      VirtualProductModelPropsAdapter
     >
 {
   constructor(
@@ -26,7 +27,7 @@ export class CreateAVirtualProductService
 
   async execute(
     input: CreateAVirtualProductServiceInput
-  ): Promise<VirtualProductModelProps> {
+  ): Promise<VirtualProductModelPropsAdapter> {
     const hasProductWithSku = await this.productsRepository.findProductBySku(
       input.sku
     )
@@ -56,6 +57,15 @@ export class CreateAVirtualProductService
       productId: product.id
     })
 
-    return { ...product, ...createdVirtualProduct }
+    return {
+      ...product,
+      ...createdVirtualProduct,
+      productType: hasProductType,
+      /**
+       * Por padrão, não são vinculadas categorias ao produto
+       * no processo de criação do mesmo
+       */
+      categories: []
+    }
   }
 }
