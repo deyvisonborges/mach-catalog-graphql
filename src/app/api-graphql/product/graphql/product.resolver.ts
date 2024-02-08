@@ -5,7 +5,9 @@ import { FindAllProductsService } from 'src/core/artifacts/product/service/find-
 import { ProductsOutput } from './products.output'
 import { AssignCategoriesToProductInputApi } from './inputs/assign-categories-to-product.input'
 import { AssignCategoriesToProductService } from 'src/core/artifacts/category/service/assign-categories-to-product.service'
-import { AdminGuard } from 'src/app/guards/admin.guard'
+import { HasRoles } from 'src/external/roles.decorator'
+import { RoleEnum } from 'src/external/roles.constant'
+import { RolesGuard } from 'src/external/roles.guard'
 
 @Resolver(() => ProductsUnion)
 export class ProductResolver {
@@ -13,7 +15,8 @@ export class ProductResolver {
   @Inject()
   private readonly assignCategoriesToProductService: AssignCategoriesToProductService
 
-  @UseGuards(AdminGuard)
+  @UseGuards(RolesGuard)
+  @HasRoles(RoleEnum.ADMIN, RoleEnum.MANAGER)
   @Query(() => [ProductsUnion])
   async findAll(): Promise<ProductsOutput[]> {
     return await this.findAllProducts.execute()
