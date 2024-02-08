@@ -8,6 +8,7 @@ import { AssignCategoriesToProductService } from 'src/core/artifacts/category/se
 import { HasRoles } from 'src/external/roles.decorator'
 import { RoleEnum } from 'src/external/roles.constant'
 import { RolesGuard } from 'src/external/roles.guard'
+import { JwtGuard } from 'src/external/jwt.guard'
 
 @Resolver(() => ProductsUnion)
 export class ProductResolver {
@@ -15,7 +16,7 @@ export class ProductResolver {
   @Inject()
   private readonly assignCategoriesToProductService: AssignCategoriesToProductService
 
-  @UseGuards(RolesGuard)
+  @UseGuards(JwtGuard, RolesGuard)
   @HasRoles(RoleEnum.ADMIN, RoleEnum.MANAGER)
   @Query(() => [ProductsUnion])
   async findAll(): Promise<ProductsOutput[]> {

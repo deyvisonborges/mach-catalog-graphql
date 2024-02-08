@@ -10,6 +10,7 @@ import { DatabaseModule } from './app/database/database.module'
 import { ApiRestModule } from './app/api-rest/api-rest.module'
 import { RabbitmqModule } from './integrations/rabbitmq/rabbitmq.module'
 import path from 'path'
+import { CustomJwtModule } from './external/jwt.module'
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import path from 'path'
       autoSchemaFile: path.resolve(process.cwd(), 'src/schema.gql')
     }),
     ConfigModule.forRoot(),
+    CustomJwtModule,
     EventEmitterModule.forRoot({
       // the maximum amount of listeners that can be assigned to an event
       maxListeners: 10
