@@ -39,17 +39,7 @@ export class ProductPrismaRepository implements ProductRepositoryContract {
     entity: ProductRepositoryTypeAdapter
   ): Promise<ProductRepositoryTypeAdapter> {
     return await this.prismaService.product.create({
-      data: {
-        costPrice: entity.costPrice,
-        description: entity.description,
-        name: entity.name,
-        promotionalPrice: entity.promotionalPrice,
-        salePrice: entity.salePrice,
-        sku: entity.sku,
-        thumbnail: entity.thumbnail,
-        id: entity.id,
-        productTypeId: entity.productTypeId
-      }
+      data: entity
     })
   }
 
