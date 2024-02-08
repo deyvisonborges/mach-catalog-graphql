@@ -18,16 +18,14 @@ export class JwtGuard implements CanActivate {
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const ctx = GqlExecutionContext.create(context)
-
     const request = ctx.getContext().req
     const token = this.extractTokenFromHeader(request)
 
     if (!token) throw new UnauthorizedException(`Token not found`)
 
     try {
-      const payload = await this.jwtService.verifyAsync(token, {
-        secret: this.configService.get<string>('SECURITY_JWT_SECRET')
-      })
+      const secret = this.configService.get<string>('SECURITY_JWT_SECRET')
+      const payload = await this.jwtService.verifyAsync(token, { secret })
 
       request['user'] = payload
       return true
