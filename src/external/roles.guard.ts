@@ -2,7 +2,7 @@ import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common'
 import { Reflector } from '@nestjs/core'
 import { GqlExecutionContext } from '@nestjs/graphql'
 import { Observable } from 'rxjs'
-import { RoleConstant, RoleEnum } from './roles.constant'
+import { RoleConstant } from './roles.constant'
 import { ROLES_KEYS } from './roles.decorator'
 
 @Injectable()
