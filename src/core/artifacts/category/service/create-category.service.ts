@@ -1,3 +1,4 @@
+import { HttpException, HttpStatus } from '@nestjs/common'
 import { BaseModelProps } from '../../../../core/common/base/model.base'
 import { BaseServiceContract } from '../../../../core/common/base/service.base'
 import { CategoryModel, CategoryModelProps } from '../category.model'
@@ -12,7 +13,11 @@ export class CreateCategoryService
   constructor(private readonly categoryRepo: CategoryRepositoryContract) {}
 
   async execute(input: CreateCategoryInput): Promise<CreateCategoryOutput> {
-    const entity = CategoryModel.create({ ...input })
-    return await this.categoryRepo.createOne(entity)
+    try {
+      const entity = CategoryModel.create({ ...input })
+      return await this.categoryRepo.createOne(entity)
+    } catch (error) {
+      throw new HttpException('Fail to create category', HttpStatus.BAD_REQUEST)
+    }
   }
 }

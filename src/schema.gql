@@ -56,6 +56,7 @@ type Mutation {
   createProductType(input: CreateProductTypeInputApi!): ProductTypeOutput!
   createCategory(input: CreateCategoryInputApi!): CategoryOutput!
   removeCategory(id: String!): CategoryOutput!
+  updateCategory(updateCategoryInput: UpdateCategoryInputApi!): String!
 }
 
 input AssignCategoriesToProductInputApi {
@@ -96,4 +97,10 @@ input CreateProductTypeInputApi {
 input CreateCategoryInputApi {
   name: String!
   description: String!
+}
+
+input UpdateCategoryInputApi {
+  id: String!
+  name: String
+  description: String
 }

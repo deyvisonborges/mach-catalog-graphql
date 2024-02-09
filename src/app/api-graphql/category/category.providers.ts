@@ -4,6 +4,7 @@ import { FindAllCategoriesService } from 'src/core/artifacts/category/service/fi
 import { FindOneCategoryService } from 'src/core/artifacts/category/service/find-one-category.service'
 import { CategoryPrismaRepository } from './category.prisma.repository'
 import { PrismaService } from 'src/app/database/prisma/prisma.service'
+import { UpdateCategoryService } from 'src/core/artifacts/category/service/update-category.service'
 
 const repositories = [
   {
@@ -37,6 +38,12 @@ const services = [
     provide: FindAllCategoriesService,
     useFactory: (categoryRepo: CategoryPrismaRepository) =>
       new FindAllCategoriesService(categoryRepo),
+    inject: [CategoryPrismaRepository]
+  },
+  {
+    provide: UpdateCategoryService,
+    useFactory: (categoryRepo: CategoryPrismaRepository) =>
+      new UpdateCategoryService(categoryRepo),
     inject: [CategoryPrismaRepository]
   }
 ]

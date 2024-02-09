@@ -14,6 +14,14 @@ export class CategoryModel extends BaseModel implements CategoryModelProps {
     Object.assign(this, props)
   }
 
+  changeName(name: string) {
+    this.name = name
+  }
+
+  changeDescription(description: string) {
+    this.description = description
+  }
+
   static create(props: CategoryModelProps): CategoryModel {
     delete props.id
     const category = new CategoryModel(props)

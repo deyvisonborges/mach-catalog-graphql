@@ -47,4 +47,15 @@ export class CategoryPrismaRepository implements CategoryRepositoryContract {
       id: String(category.id)
     }))
   }
+
+  async update(entity: CategoryModelProps): Promise<void> {
+    await this.prismaService.category.update({
+      data: {
+        name: entity.name,
+        description: entity.description,
+        updatedAt: new Date()
+      },
+      where: { id: Number(entity.id) }
+    })
+  }
 }

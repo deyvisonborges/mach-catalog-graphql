@@ -35,6 +35,8 @@
     "@nestjs/throttler": "^5.1.1",
     "@prisma/client": "^5.8.1",
     "@supabase/supabase-js": "^2.39.3",
+    "amqp-connection-manager": "^4.1.14",
+    "amqplib": "^0.10.3",
     "aws-sdk": "^2.1544.0",
     "graphql": "^16.8.1",
     "reflect-metadata": "^0.1.13",

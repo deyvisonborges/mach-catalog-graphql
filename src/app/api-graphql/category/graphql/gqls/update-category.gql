@@ -1,0 +1,9 @@
+mutation {
+  updateCategory(
+    updateCategoryInput: {
+      id: "6"
+      name: "Cosméticos Masculinos"
+      description: "Linha completa de produtos para homens"
+    }
+  )
+}
