@@ -1,22 +1,22 @@
 import { BaseModelProps } from 'src/core/common/base/model.base'
 import {
-  VirtualProductModel,
-  VirtualProductModelProps
+  VirtualProductModelProps,
+  VirtualProductModel
 } from '../virtual-product/virtual-product.model'
 import {
-  SimpleProductModel,
-  SimpleProductModelProps
+  SimpleProductModelProps,
+  SimpleProductModel
 } from '../simple-product/simple-product.model'
+import { ProductTypeConstant } from './product.constants'
 
 type Product = SimpleProductModel | VirtualProductModel
-type ProductTypeConstant = 'simple' | 'virtual' | 'configurable'
 
 export class ProductFactory {
-  public createProduct<T extends ProductTypeConstant>(
-    type: T,
-    config: T extends 'simple'
+  public createProduct<K extends ProductTypeConstant>(
+    type: K,
+    config: K extends 'simple'
       ? Omit<SimpleProductModelProps, keyof BaseModelProps>
-      : T extends 'virtual'
+      : K extends 'virtual'
       ? Omit<VirtualProductModelProps, keyof BaseModelProps>
       : never
   ): Product {

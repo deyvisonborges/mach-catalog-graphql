@@ -1,4 +1,5 @@
 import { BaseModel, BaseModelProps } from '../../../core/common/base/model.base'
+import { ProductTypeConstant } from './product.constants'
 
 export type ProductModelProps = {
   name: string
@@ -8,7 +9,7 @@ export type ProductModelProps = {
   costPrice: number
   promotionalPrice: number
   thumbnail: string
-  productTypeId: string
+  productType: ProductTypeConstant
   categoriesIds: Map<string, string>
 } & BaseModelProps
 
@@ -23,7 +24,7 @@ export abstract class ProductModel<T extends ProductModelProps>
   costPrice: number
   promotionalPrice: number
   thumbnail: string
-  productTypeId: string
+  productType: ProductTypeConstant
   categoriesIds: Map<string, string>
 
   abstract create(props: T): T
