@@ -1,6 +1,5 @@
 import { Module } from '@nestjs/common'
 import { EventEmitterModule } from '@nestjs/event-emitter'
-import { AppResolver } from './app.resolver'
 import { GraphQLModule } from '@nestjs/graphql'
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo'
 import { ConfigModule } from './app/config/config.module'
@@ -29,7 +28,6 @@ import { CustomJwtModule } from './external/jwt.module'
     ApiRestModule,
     IntegrationsModule,
     RabbitmqModule
-  ],
-  providers: [AppResolver]
+  ]
 })
 export class AppModule {}
