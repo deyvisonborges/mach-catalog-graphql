@@ -37,7 +37,7 @@ export class FindProductByIdService
     return {
       ...product,
       categories: this.getCategories(categoriesFromProduct),
-      productType: typeFromProduct
+      type: typeFromProduct.name
     }
   }
 

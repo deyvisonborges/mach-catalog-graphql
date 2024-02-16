@@ -7,3 +7,5 @@ export type ProductRepositoryContract = {
   ): Promise<ProductRepositoryTypeAdapter | null>
   findByIds(productIds: string[]): Promise<ProductRepositoryTypeAdapter[]>
 } & BaseRepositoryContract<ProductRepositoryTypeAdapter>
+
+export const PRODUCT_REPOSITORY_TOKEN = 'product_repository_token'

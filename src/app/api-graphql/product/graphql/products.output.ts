@@ -1,48 +1,41 @@
-import { Field, Float, ObjectType } from '@nestjs/graphql'
-import { ProductTypeModelProps } from 'src/core/artifacts/product-type/product-type.model'
-import { ProductTypeOutput } from '../../product-type/graphql/product-type.output'
-import { CategoryOutput } from '../../category/graphql/category.output'
+import { Field, ObjectType } from '@nestjs/graphql'
 import { CategoryModelProps } from 'src/core/artifacts/category/category.model'
 import { ProductModelPropsAdapter } from 'src/core/artifacts/product/product.model.adapter'
+import { ProductTypeConstant } from 'src/core/artifacts/product/product.constants'
+import { SimpleProductModelProps } from 'src/core/artifacts/simple-product/simple-product.model'
 
 @ObjectType()
-export class ProductsOutput implements ProductModelPropsAdapter {
-  @Field(() => String)
+export class ProductsOutput
+  implements ProductModelPropsAdapter, Partial<SimpleProductModelProps>
+{
+  @Field()
   name: string
 
-  @Field(() => String)
+  @Field()
   description: string
 
-  @Field(() => String)
+  @Field()
   sku: string
 
-  @Field(() => Float)
+  @Field()
   salePrice: number
 
-  @Field(() => Float)
+  @Field()
   costPrice: number
 
-  @Field(() => Float)
+  @Field()
   promotionalPrice: number
 
-  @Field(() => String)
+  @Field()
   thumbnail: string
 
-  @Field(() => ProductTypeOutput)
-  productType: ProductTypeModelProps
+  @Field()
+  type: ProductTypeConstant
 
-  @Field(() => [CategoryOutput])
+  @Field()
   categories: CategoryModelProps[]
 
-  @Field(() => String, { nullable: true })
-  size?: string
-
-  @Field(() => Float, { nullable: true })
-  weight?: number
-
-  @Field(() => String, { nullable: true })
   material?: string
-
-  @Field(() => String, { nullable: true })
-  downloadLink?: string
+  size?: string
+  weight?: number
 }

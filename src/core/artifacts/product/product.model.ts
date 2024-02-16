@@ -9,7 +9,7 @@ export type ProductModelProps = {
   costPrice: number
   promotionalPrice: number
   thumbnail: string
-  productType: ProductTypeConstant
+  productTypeId: string
   categoriesIds: Map<string, string>
 } & BaseModelProps
 
@@ -24,7 +24,7 @@ export abstract class ProductModel<T extends ProductModelProps>
   costPrice: number
   promotionalPrice: number
   thumbnail: string
-  productType: ProductTypeConstant
+  productTypeId: string
   categoriesIds: Map<string, string>
 
   abstract create(props: T): T

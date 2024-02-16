@@ -3,9 +3,9 @@ import { ProductRepositoryContract } from '../repository/product.repository.cont
 import { SimpleProductRepositoryContract } from '../../simple-product/repository/simple-product.repository.contract'
 import { VirtualProductRepositoryContract } from '../../virtual-product/repository/virtual-product.repository.contract'
 import { ProductTypeRepositoryContract } from '../../product-type/repository/product-type.repository.contract'
-import { ProductTypeModelProps } from '../../product-type/product-type.model'
 import { ProductCategoryRepositoryContract } from 'src/core/common/repositories/product-category/product-category.repository.contract'
 import { ProductModelPropsAdapter } from '../product.model.adapter'
+import { ProductTypeConstant } from '../product.constants'
 
 type Output = ProductModelPropsAdapter[]
 
@@ -26,8 +26,8 @@ export class FindAllProductsService
       this.productTypeRepository.findAll()
     ])
 
-    const productTypeMap = new Map<string, ProductTypeModelProps>()
-    productTypes.forEach(type => productTypeMap.set(type.id, type))
+    const productTypeMap = new Map<string, ProductTypeConstant | string>()
+    productTypes.forEach(type => productTypeMap.set(type.id, type.name))
 
     const resolvedProducts: Output = await Promise.all(
       products.map(async product => {
@@ -51,7 +51,7 @@ export class FindAllProductsService
 
         return {
           ...productWithoutTypeId,
-          productType: correspondingType,
+          type: correspondingType,
           categories: categories,
           ...(simpleProduct && {
             weight: simpleProduct.weight,
