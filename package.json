@@ -39,6 +39,7 @@
     "amqplib": "^0.10.3",
     "aws-sdk": "^2.1544.0",
     "graphql": "^16.8.1",
+    "helmet": "^7.1.0",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.2.0",
     "uuid": "^9.0.1"
