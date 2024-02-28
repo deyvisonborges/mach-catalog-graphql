@@ -1,20 +1,23 @@
 version: '3.8'
 
 services:
-  app:
+  api:
     build:
-      context: .
       dockerfile: Dockerfile
+      context: .
+      # Only will build development stage from our dockerfile
       target: development
     volumes:
-      - .:/home/node/app
-      - .env:/home/node/app/.env
+      - .:/usr/src/app
+    env_file:
+    - .env
+    # Run a command against the development stage of the image
     command: npm run start:dev
     depends_on:
       - postgres
       - rabbitmq
-    ports: 
-      - '3000:3000'
+    ports:
+      - 3000:3000
 
   postgres:
     image: postgres:latest

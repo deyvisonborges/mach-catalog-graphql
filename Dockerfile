@@ -1,15 +1,11 @@
 ###################
 # BUILD FOR LOCAL DEVELOPMENT
 ###################
-FROM node:21-slim As development
 
-# Use the node user from the image (instead of the root user)
-USER node
-
-RUN mkdir /home/node/app
+FROM node:18-alpine As development
 
 # Create app directory
-WORKDIR /home/node/app
+WORKDIR /usr/src/app
 
 # Copy application dependency manifests to the container image.
 # A wildcard is used to ensure copying both package.json AND package-lock.json (when available).
@@ -22,15 +18,16 @@ RUN npm ci --force
 # Bundle app source
 COPY --chown=node:node . .
 
-CMD ["tail", "-f", "/dev/null"]
+# Use the node user from the image (instead of the root user)
+USER node
 
 ###################
 # BUILD FOR PRODUCTION
 ###################
 
-FROM node:21-slim As build
+FROM node:18-alpine As build
 
-WORKDIR /home/node/app
+WORKDIR /usr/src/app
 
 COPY --chown=node:node package*.json ./
 
@@ -38,7 +35,7 @@ COPY --chown=node:node package*.json ./
 # The Nest CLI is a dev dependency,
 # In the previous development stage we ran `npm ci` which installed all dependencies.
 # So we can copy over the node_modules directory from the development image into this build image.
-COPY --chown=node:node --from=development /home/node/app/node_modules ./node_modules
+COPY --chown=node:node --from=development /usr/src/app/node_modules ./node_modules
 
 COPY --chown=node:node . .
 
@@ -59,11 +56,11 @@ USER node
 # PRODUCTION
 ###################
 
-FROM node:21-slim As production
+FROM node:18-alpine As production
 
 # Copy the bundled code from the build stage to the production image
-COPY --chown=node:node --from=build /home/node/app/node_modules ./node_modules
-COPY --chown=node:node --from=build /home/node/app/dist ./dist
+COPY --chown=node:node --from=build /usr/src/app/node_modules ./node_modules
+COPY --chown=node:node --from=build /usr/src/app/dist ./dist
 
 # Start the server using the production build
 CMD [ "node", "dist/main.js" ]
