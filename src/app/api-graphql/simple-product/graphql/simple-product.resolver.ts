@@ -10,14 +10,14 @@ import { SimpleProductOutput } from './simple-product.output'
 export class SimpleProductResolver {
   @Inject() private readonly createASimpleProduct: CreateASimpleProductService
   @Inject() private readonly findAllSimpleProducts: FindAllSimpleProductsService
-  @Inject() private amqpConnection: AmqpConnection
+  // @Inject() private amqpConnection: AmqpConnection
 
   @Mutation(() => SimpleProductOutput)
   async createSimpleProduct(
     @Args('input') input: CreateASimpleProductServiceInputApi
   ) {
     const result = await this.createASimpleProduct.execute(input)
-    await this.amqpConnection.publish('amq.direct', 'ProductCreated', result)
+    // await this.amqpConnection.publish('amq.direct', 'ProductCreated', result)
     return result
   }
 

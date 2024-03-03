@@ -26,8 +26,8 @@ import { CustomJwtModule } from './external/jwt.module'
     DatabaseModule,
     ApiGraphqlModule,
     ApiRestModule,
-    IntegrationsModule,
-    RabbitmqModule
+    IntegrationsModule
+    // RabbitmqModule
   ]
 })
 export class AppModule {}
