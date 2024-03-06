@@ -9,18 +9,31 @@ import { HasRoles } from 'src/external/roles.decorator'
 import { RoleEnum } from 'src/external/roles.constant'
 import { RolesGuard } from 'src/external/roles.guard'
 import { JwtGuard } from 'src/external/jwt.guard'
+import { FindProductsByIds } from 'src/core/artifacts/product/service/find-product-by-ids.service'
 
 @Resolver(() => ProductsUnion)
 export class ProductResolver {
-  @Inject() private readonly findAllProducts: FindAllProductsService
+  @Inject()
+  private readonly findAllProducts: FindAllProductsService
   @Inject()
   private readonly assignCategoriesToProductService: AssignCategoriesToProductService
+  @Inject()
+  private readonly findProductsByIdsService: FindProductsByIds
 
   @UseGuards(JwtGuard, RolesGuard)
   @HasRoles(RoleEnum.ADMIN, RoleEnum.MANAGER)
   @Query(() => [ProductsUnion])
   async findAll(): Promise<ProductsOutput[]> {
     return await this.findAllProducts.execute()
+  }
+
+  @Query(() => [ProductsUnion])
+  async findByIds(
+    @Args('input', { type: () => [String] }) input: string[]
+  ): Promise<ProductsOutput[]> {
+    return await this.findProductsByIdsService.execute({
+      ids: input
+    })
   }
 
   @Mutation(() => String)

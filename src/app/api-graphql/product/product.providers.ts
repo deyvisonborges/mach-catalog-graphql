@@ -9,6 +9,7 @@ import { AssignCategoriesToProductService } from 'src/core/artifacts/category/se
 import { FindProductByIdService } from 'src/core/artifacts/product/service/find-product-by-id.service'
 import { GetValidCategoriesByIdsService } from 'src/core/artifacts/category/service/get-valid-categories-by-ids.service'
 import { CategoryPrismaRepository } from '../category/category.prisma.repository'
+import { FindProductsByIds } from 'src/core/artifacts/product/service/find-product-by-ids.service'
 
 const repositories = [
   {
@@ -125,6 +126,12 @@ const services = [
       CategoryPrismaRepository,
       ProductCategoryPrismaRepository
     ]
+  },
+  {
+    provide: FindProductsByIds,
+    useFactory: (findProductByIdService: FindProductByIdService) =>
+      new FindProductsByIds(findProductByIdService),
+    inject: [FindProductByIdService]
   }
 ]
 

@@ -1,0 +1,9 @@
+query {
+  findByIds(input: ["f2b6bebe-013f-4522-a653-b2672f732e50"]) {
+    ... on SimpleProductOutput {
+      name
+      salePrice
+      description
+    }
+  }
+}

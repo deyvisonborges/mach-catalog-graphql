@@ -40,8 +40,8 @@ type VirtualProductOutput {
 }
 
 type Query {
-  hello: String!
   findAll: [Products!]!
+  findByIds(input: [String!]!): [Products!]!
   findAllSimpleProduct: [SimpleProductOutput!]!
   findOne(input: String!): CategoryOutput!
   findAllCategories: [CategoryOutput!]!
