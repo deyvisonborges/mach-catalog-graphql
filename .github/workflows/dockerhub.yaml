@@ -13,4 +13,5 @@ jobs:
           docker build . -t deyvisonborges/mach-commerce-catalog:latest
       - name: publish
         run: |
+          docker login -u deyvisonborges -p ${{ secrets.DOCKERHUB_TOKEN }}
           docker push deyvisonborges/mach-commerce-catalog:latest
