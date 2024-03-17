@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Service
+metadata:
+  name: nestjs-app-deployment
+  namespace: mach-commerce-catalog
+  labels:
+    app: nestjs-app
+spec:
+  selector:
+    # quais pods estao associados a esse service?
+    matchLabels:
+      app: nestjs-app
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: nestjs-app 
+    spec:
+      containers:
+      - image: deyvisonborges/mach-commerce-catalog:latest
+        name: mach-commerce-catalog-container
+        ports:
+        - containerPort: 80
+          name: nestjs-app

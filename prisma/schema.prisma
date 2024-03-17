@@ -1,5 +1,6 @@
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  binaryTargets   = ["native", "linux-musl-arm64-openssl-3.0.x"]
 }
 
 datasource db {
@@ -9,22 +10,17 @@ datasource db {
 
 model ProductType {
   id        String    @id @default(uuid())
-  createdAt DateTime? @default(now()) @map(name: "created_at")
-  updatedAt DateTime? @updatedAt @map(name: "updated_at")
-  active    Boolean?  @default(false)
-  
   name      String
+  active    Boolean?  @default(false)
+  createdAt DateTime? @default(now()) @map("created_at")
+  updatedAt DateTime? @updatedAt @map("updated_at")
   Product   Product[]
 
   @@map("products_types")
 }
 
 model Product {
-  id        String    @id @default(uuid())
-  createdAt DateTime? @default(now()) @map(name: "created_at")
-  updatedAt DateTime? @updatedAt @map(name: "updated_at")
-  active    Boolean?  @default(false)
-
+  id               String            @id @default(uuid())
   name             String
   description      String
   sku              String
@@ -33,64 +29,61 @@ model Product {
   promotionalPrice Float             @map("promotional_price")
   thumbnail        String
   productTypeId    String            @map("product_type_id")
+  active           Boolean?          @default(false)
+  createdAt        DateTime?         @default(now()) @map("created_at")
+  updatedAt        DateTime?         @updatedAt @map("updated_at")
   productType      ProductType       @relation(fields: [productTypeId], references: [id])
+  ProductCategory  ProductCategory[]
   simpleProduct    SimpleProduct[]
   virtualProduct   VirtualProduct[]
-  ProductCategory  ProductCategory[]
 
   @@map("products")
 }
 
 model SimpleProduct {
   id        String    @id @default(uuid())
-  createdAt DateTime? @default(now()) @map(name: "created_at")
-  updatedAt DateTime? @updatedAt @map(name: "updated_at")
-  active    Boolean?  @default(false)
-
   size      String
   weight    Int
   material  String
-  productId String  @map("product_id")
-  product   Product @relation(fields: [productId], references: [id])
+  productId String    @map("product_id")
+  active    Boolean?  @default(false)
+  createdAt DateTime? @default(now()) @map("created_at")
+  updatedAt DateTime? @updatedAt @map("updated_at")
+  product   Product   @relation(fields: [productId], references: [id])
 
   @@map("products_simple")
 }
 
 model VirtualProduct {
-  id        String    @id @default(uuid())
-  createdAt DateTime? @default(now()) @map(name: "created_at")
-  updatedAt DateTime? @updatedAt @map(name: "updated_at")
-  active    Boolean?  @default(false)
-
-  downloadLink String @map("download_link")
-
-  productId String  @map("product_id")
-  product   Product @relation(fields: [productId], references: [id])
+  id           String    @id @default(uuid())
+  downloadLink String    @map("download_link")
+  productId    String    @map("product_id")
+  active       Boolean?  @default(false)
+  createdAt    DateTime? @default(now()) @map("created_at")
+  updatedAt    DateTime? @updatedAt @map("updated_at")
+  product      Product   @relation(fields: [productId], references: [id])
 
   @@map("products_virtual")
 }
 
 model Category {
-  id        Int       @id @default(autoincrement())
-  createdAt DateTime? @default(now()) @map(name: "created_at")
-  updatedAt DateTime? @updatedAt @map(name: "updated_at")
-  active    Boolean?  @default(false)
-
-  name        String
-  description String
-
+  id              Int               @id @default(autoincrement())
+  createdAt       DateTime?         @default(now()) @map("created_at")
+  updatedAt       DateTime?         @updatedAt @map("updated_at")
+  active          Boolean?          @default(false)
+  name            String
+  description     String
   ProductCategory ProductCategory[]
 
   @@map("categories")
 }
 
-// Many-to-many relation between Product and Category
 model ProductCategory {
   id         String   @id @default(uuid())
   productId  String
   categoryId Int
-  product    Product  @relation(fields: [productId], references: [id])
   category   Category @relation(fields: [categoryId], references: [id])
+  product    Product  @relation(fields: [productId], references: [id])
 
   @@map("products_categories")
 }

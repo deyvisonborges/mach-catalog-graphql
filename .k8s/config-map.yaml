@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mach-commerce-catalog-configmap
+  namespace: mach-commerce-catalog
+data:
+  api-url: "http://mach-commerce-catalog-api:5050"

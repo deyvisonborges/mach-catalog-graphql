@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nestjs-app-deployment
+  namespace: mach-commerce-catalog
+  labels:
+    app: nestjs-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nestjs-app
+  template:
+    metadata:
+      labels:
+        app: nestjs-app
+    spec:
+      containers:
+      - image: deyvisonborges/mach-commerce-catalog:latest
+        name: mach-commerce-catalog-container
+        ports:
+        - containerPort: 80
+          name: nestjs-app

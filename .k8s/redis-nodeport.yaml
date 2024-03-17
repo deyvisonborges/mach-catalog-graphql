@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-nodeport
+  namespace: mach-commerce-catalog
+  labels:
+    app: redis
+spec:
+  type: NodePort
+  ports:
+  - name: redis-nodeport-service
+    port: 5000
+    targetPort: 6379
+  selector:
+    app: redis
