@@ -7,9 +7,10 @@ import { ApiGraphqlModule } from './app/api-graphql/api-graphql.module'
 import { IntegrationsModule } from './app/integrations/integrations.module'
 import { DatabaseModule } from './app/database/database.module'
 import { ApiRestModule } from './app/api-rest/api-rest.module'
-// import { RabbitmqModule } from './integrations/rabbitmq/rabbitmq.module'
+import { RabbitmqModule } from './integrations/rabbitmq/rabbitmq.module'
 import path from 'path'
 import { CustomJwtModule } from './external/jwt.module'
+// import { RMQ_PROVIDER_CONFIG } from './integrations/rabbitmq/rmq.provider'
 
 @Module({
   imports: [
@@ -26,8 +27,9 @@ import { CustomJwtModule } from './external/jwt.module'
     DatabaseModule,
     ApiGraphqlModule,
     ApiRestModule,
-    IntegrationsModule
-    // RabbitmqModule
+    IntegrationsModule,
+    RabbitmqModule
   ]
+  // providers: [RMQ_PROVIDER_CONFIG]
 })
 export class AppModule {}

@@ -1,27 +1,32 @@
-import { AmqpConnection } from '@golevelup/nestjs-rabbitmq'
-import { Injectable } from '@nestjs/common'
+import amqp from 'amqplib'
+import { Observable } from 'rxjs'
 
-@Injectable()
 export class RabbitMQService {
-  private amqp: AmqpConnection
-  private channel = null
+  private connection: amqp.Connection | null = null
+  private channel: amqp.Channel | null = null
+  private channelConsumer: amqp.Channel | null = null
 
-  async connect() {
-    setTimeout(async () => {
-      try {
-        const connection = await this.amqp.connection('amqp://rabbitmq:5672')
-        this.channel = await connection.createChannel()
-        await this.channel.assertQueue('products')
-        console.log('RabbitMQ connected')
-      } catch (err) {
-        console.error('Failed to connect to RabbitMQ:', err.message)
-      }
-    }, 20000) // delay 10 seconds to wait for RabbitMQ to start
+  constructor() {
+    this.connect()
   }
 
-  async publishMessage(queue, message) {
+  async connect(): Promise<void> {
+    try {
+      this.connection = await amqp.connect(
+        'amqp://myuser:secret@localhost:5673'
+      )
+      this.channel = await this.connection.createChannel()
+      await this.channel.assertQueue('order-queue')
+      console.log('RabbitMQ connected')
+    } catch (err) {
+      console.error('Failed to connect to RabbitMQ:', err.message)
+    }
+  }
+
+  async publishMessage(queue: string, message: any): Promise<void> {
     if (!this.channel) {
       console.error('No RabbitMQ channel available.')
+      await this.connect() // Tentar reconectar
       return
     }
 
@@ -31,25 +36,27 @@ export class RabbitMQService {
         Buffer.from(JSON.stringify(message))
       )
     } catch (err) {
-      console.log(err)
+      console.error('Failed to publish message:', err)
     }
   }
 
-  async consumeMessage(queue, callback) {
+  async consumeMessages(
+    queue: string,
+    callback?: (message: any) => void
+  ): Promise<Observable<any>> {
     if (!this.channel) {
-      console.error('No RabbitMQ channel available.')
+      await this.connect()
       return
     }
-
-    try {
-      await this.channel.consume(queue, message => {
+    await this.channel.consume(queue, message => {
+      if (message) {
         const content = message.content.toString()
-        const parsedContent = JSON.parse(content)
-        callback(parsedContent)
-        this.channel.ack(message)
-      })
-    } catch (err) {
-      console.log(err)
-    }
+        if (callback) {
+          const parsedContent = JSON.parse(content)
+          callback(parsedContent)
+        }
+        this.channel!.ack(message)
+      }
+    })
   }
 }
