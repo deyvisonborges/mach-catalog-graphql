@@ -53,7 +53,14 @@ export class CreateASimpleProductService
 
     // cria o produto
     const product = await this.productsRepository.createOne({
-      ...input
+      costPrice: input.costPrice,
+      description: input.description,
+      name: input.name,
+      productTypeId: input.productTypeId,
+      promotionalPrice: input.promotionalPrice,
+      salePrice: input.salePrice,
+      sku: input.sku,
+      thumbnail: input.thumbnail
     })
 
     // cria o tipo de produto com os dados do produto criado
@@ -65,8 +72,8 @@ export class CreateASimpleProductService
     })
 
     return {
-      ...product,
       ...createdSimpleProduct,
+      ...product,
       productType: hasProductType,
       /**
        * Por padrão, não são vinculadas categorias ao produto
