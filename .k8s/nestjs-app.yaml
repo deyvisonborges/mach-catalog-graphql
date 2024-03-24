@@ -21,3 +21,14 @@ spec:
         ports:
         - containerPort: 80
           name: nestjs-app
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: nestjs-nodeport-service
+  namespace: mach-comemrce-catalog-namespace
+spec:
+  selector:
+    app: nestjs-app
