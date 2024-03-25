@@ -16,19 +16,26 @@ spec:
         app: nestjs-app
     spec:
       containers:
-      - image: deyvisonborges/mach-commerce-catalog:latest
-        name: mach-commerce-catalog-container
-        ports:
-        - containerPort: 80
-          name: nestjs-app
-
+        - image: deyvisonborges/mach-commerce-catalog:latest
+          name: mach-commerce-catalog-container
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
+              name: nestjs-app
 ---
-
 apiVersion: v1
 kind: Service
 metadata:
   name: nestjs-nodeport-service
-  namespace: mach-comemrce-catalog-namespace
+  namespace: mach-commerce-catalog
 spec:
+  ports:
+    - name: "nestjs-service-port"
+      port: 3000
+      targetPort: 3000
+      nodePort: 30253
+      protocol: TCP
   selector:
     app: nestjs-app
+  type: NodePort
+  
